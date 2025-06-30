@@ -13,19 +13,64 @@ namespace DOAN1
 {
     public partial class FormThemChiTiet : Form
     {
-        private string maHoaDon;
+       
         private string connectionString = "server=localhost;user id=root;password=;database=qlbanhang;charset=utf8";
-        public FormThemChiTiet(string maHD)
+        private string maHoaDon, maSanPham;
+
+        public FormThemChiTiet(string maHD)  // Thêm mới
         {
             InitializeComponent();
-            this.maHoaDon = maHD;
+            maHoaDon = maHD;
             txtmaHoaDon.Text = maHD;
             txtmaHoaDon.ReadOnly = true;
+        }
 
-            // Gắn sự kiện tự tính thành tiền
-            ndsoLuong.ValueChanged += TinhThanhTien;
-            txtdonGiaBan.TextChanged += TinhThanhTien;
-            txtthanhTien.ReadOnly = true;
+        public FormThemChiTiet(string maHD, string maSP)  // Sửa
+        {
+            InitializeComponent();
+            maHoaDon = maHD;
+            maSanPham = maSP;
+
+            txtmaHoaDon.Text = maHD;
+            txtmaSanPham.Text = maSP;
+            txtmaHoaDon.ReadOnly = true;
+            txtmaSanPham.ReadOnly = true;
+
+            LoadChiTietCu(maHD, maSP); // bạn cần viết hàm này
+        }
+
+
+        private void LoadChiTietCu(string maHD, string maSP)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"SELECT soLuong, donGiaBan, thanhTien 
+                             FROM tt_chitiet_hoadon 
+                             WHERE maHoaDon = @maHD AND maSanPham = @maSP";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@maHD", maHD);
+                    cmd.Parameters.AddWithValue("@maSP", maSP);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ndsoLuong.Value = Convert.ToInt32(reader["soLuong"]);
+                            txtdonGiaBan.Text = reader["donGiaBan"].ToString();
+                            txtthanhTien.Text = reader["thanhTien"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải chi tiết hóa đơn: " + ex.Message);
+            }
         }
 
         private void TinhThanhTien(object sender, EventArgs e)
@@ -67,9 +112,22 @@ namespace DOAN1
                 {
                     conn.Open();
 
-                    string query = @"INSERT INTO tt_chitiet_hoadon 
-                             (maHoaDon, maSanPham, soLuong, donGiaBan, thanhTien) 
-                             VALUES (@maHD, @maSP, @sl, @gia, @tt)";
+                    string query;
+
+                    if (maSanPham == null)
+                    {
+                        // === THÊM ===
+                        query = @"INSERT INTO tt_chitiet_hoadon 
+                          (maHoaDon, maSanPham, soLuong, donGiaBan, thanhTien) 
+                          VALUES (@maHD, @maSP, @sl, @gia, @tt)";
+                    }
+                    else
+                    {
+                        // === SỬA ===
+                        query = @"UPDATE tt_chitiet_hoadon 
+                          SET soLuong = @sl, donGiaBan = @gia, thanhTien = @tt 
+                          WHERE maHoaDon = @maHD AND maSanPham = @maSP";
+                    }
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@maHD", maHoaDon);
@@ -79,14 +137,16 @@ namespace DOAN1
                     cmd.Parameters.AddWithValue("@tt", thanhTien);
 
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Đã thêm chi tiết hóa đơn thành công!");
+
+                    string msg = (maSanPham == null) ? "Thêm chi tiết hóa đơn thành công!" : "Cập nhật chi tiết hóa đơn thành công!";
+                    MessageBox.Show(msg);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi thêm dữ liệu: " + ex.Message);
+                MessageBox.Show("Lỗi khi lưu chi tiết hóa đơn: " + ex.Message);
             }
         }
 

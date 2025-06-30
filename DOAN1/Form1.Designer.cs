@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnChiTietHoaDon = new Button();
             label1 = new Label();
             dgvHoaDon = new DataGridView();
             toolStrip1 = new ToolStrip();
@@ -41,27 +40,20 @@
             panelChiTiet = new Panel();
             dgvChiTietHoaDon = new DataGridView();
             label2 = new Label();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripSeparator3 = new ToolStripSeparator();
+            toolStripSeparator4 = new ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)dgvHoaDon).BeginInit();
             toolStrip1.SuspendLayout();
             panelChiTiet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvChiTietHoaDon).BeginInit();
             SuspendLayout();
             // 
-            // btnChiTietHoaDon
-            // 
-            btnChiTietHoaDon.Location = new Point(1232, 478);
-            btnChiTietHoaDon.Name = "btnChiTietHoaDon";
-            btnChiTietHoaDon.Size = new Size(94, 29);
-            btnChiTietHoaDon.TabIndex = 2;
-            btnChiTietHoaDon.Text = "Chi Tiết Hóa Đơn";
-            btnChiTietHoaDon.UseVisualStyleBackColor = true;
-            btnChiTietHoaDon.Click += btnChiTietHoaDon_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label1.Location = new Point(690, 27);
+            label1.Location = new Point(538, 48);
             label1.Name = "label1";
             label1.Size = new Size(104, 25);
             label1.TabIndex = 10;
@@ -71,20 +63,21 @@
             // 
             dgvHoaDon.AllowUserToResizeRows = false;
             dgvHoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHoaDon.Location = new Point(0, 67);
+            dgvHoaDon.Location = new Point(33, 112);
             dgvHoaDon.Name = "dgvHoaDon";
             dgvHoaDon.RowHeadersWidth = 51;
-            dgvHoaDon.Size = new Size(1384, 400);
+            dgvHoaDon.Size = new Size(1176, 191);
             dgvHoaDon.TabIndex = 11;
             dgvHoaDon.CellContentClick += dataGridView1_CellContentClick;
+            dgvHoaDon.SelectionChanged += dgvHoaDon_SelectionChanged;
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsThem, tsSua, toolStripSeparator1, tsXoa, tsChitiet, tslammoi });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsThem, toolStripSeparator3, tsSua, toolStripSeparator4, tsXoa, toolStripSeparator2, tsChitiet, toolStripSeparator1, tslammoi });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1384, 27);
+            toolStrip1.Size = new Size(1260, 27);
             toolStrip1.TabIndex = 12;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -99,27 +92,34 @@
             // 
             // tsSua
             // 
+            tsSua.BackColor = SystemColors.Control;
             tsSua.Image = Properties.Resources.icons8_update_48;
             tsSua.ImageTransparentColor = Color.Magenta;
             tsSua.Name = "tsSua";
             tsSua.Size = new Size(58, 24);
             tsSua.Text = "Sửa";
+            tsSua.Click += tsSua_Click;
             // 
             // toolStripSeparator1
             // 
+            toolStripSeparator1.BackColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator1.ForeColor = SystemColors.ActiveCaptionText;
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 27);
             // 
             // tsXoa
             // 
+            tsXoa.BackColor = SystemColors.Control;
             tsXoa.Image = Properties.Resources.icons8_delete_48;
             tsXoa.ImageTransparentColor = Color.Magenta;
             tsXoa.Name = "tsXoa";
             tsXoa.Size = new Size(59, 24);
             tsXoa.Text = "Xóa";
+            tsXoa.Click += tsXoa_Click;
             // 
             // tsChitiet
             // 
+            tsChitiet.BackColor = SystemColors.Control;
             tsChitiet.Image = Properties.Resources.icons8_detail_48;
             tsChitiet.ImageTransparentColor = Color.Magenta;
             tsChitiet.Name = "tsChitiet";
@@ -139,9 +139,9 @@
             // 
             panelChiTiet.Controls.Add(dgvChiTietHoaDon);
             panelChiTiet.Controls.Add(label2);
-            panelChiTiet.Location = new Point(0, 513);
+            panelChiTiet.Location = new Point(33, 309);
             panelChiTiet.Name = "panelChiTiet";
-            panelChiTiet.Size = new Size(1372, 364);
+            panelChiTiet.Size = new Size(1176, 318);
             panelChiTiet.TabIndex = 13;
             panelChiTiet.Visible = false;
             // 
@@ -149,31 +149,51 @@
             // 
             dgvChiTietHoaDon.AllowUserToResizeRows = false;
             dgvChiTietHoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvChiTietHoaDon.Location = new Point(0, 68);
+            dgvChiTietHoaDon.Location = new Point(0, 120);
             dgvChiTietHoaDon.Name = "dgvChiTietHoaDon";
             dgvChiTietHoaDon.RowHeadersWidth = 51;
-            dgvChiTietHoaDon.Size = new Size(1384, 300);
+            dgvChiTietHoaDon.Size = new Size(1173, 195);
             dgvChiTietHoaDon.TabIndex = 14;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label2.Location = new Point(608, 20);
+            label2.Location = new Point(472, 37);
             label2.Name = "label2";
             label2.Size = new Size(178, 25);
             label2.TabIndex = 11;
             label2.Text = "CHI TIẾT HÓA ĐƠN";
             // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.BackColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator2.ForeColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 27);
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.BackColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator3.ForeColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 27);
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.BackColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator4.ForeColor = SystemColors.ActiveCaptionText;
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(6, 27);
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1384, 877);
+            ClientSize = new Size(1260, 639);
             Controls.Add(panelChiTiet);
             Controls.Add(toolStrip1);
             Controls.Add(label1);
-            Controls.Add(btnChiTietHoaDon);
             Controls.Add(dgvHoaDon);
             Name = "Form1";
             Load += Form1_Load;
@@ -188,7 +208,6 @@
         }
 
         #endregion
-        private Button btnChiTietHoaDon;
         private Label label1;
         private DataGridView dgvHoaDon;
         private ToolStrip toolStrip1;
@@ -201,5 +220,8 @@
         private Panel panelChiTiet;
         private Label label2;
         private DataGridView dgvChiTietHoaDon;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }
