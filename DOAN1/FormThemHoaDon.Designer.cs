@@ -2,169 +2,163 @@
 {
     partial class FormThemHoaDon
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.btnLuu = new Button();
+            btnLuu = new Button();
             btnHuy = new Button();
-            label = new Label();
-            txtmaHoaDon = new TextBox();
-            dateTimengayLap = new DateTimePicker();
-            txt = new Label();
-            txtmaNhanVien = new TextBox();
-            label4 = new Label();
-            label3 = new Label();
-            txttongThanhTien = new TextBox();
+            lblMaHoaDon = new Label();
+            txtMaHoaDon = new TextBox();
+            dateNgayLap = new DateTimePicker();
+            lblMaNhanVien = new Label();
+            txtMaNhanVien = new TextBox();
+            lblNgayLap = new Label();
+            lblTongTien = new Label();
+            txtTongTien = new TextBox();
             SuspendLayout();
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new Point(326, 335);
-            this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new Size(94, 29);
-            this.btnLuu.TabIndex = 9;
-            this.btnLuu.Text = "Lưu";
-            this.btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.Location = new Point(530, 536);
+            btnLuu.Margin = new Padding(5);
+            btnLuu.Name = "btnLuu";
+            btnLuu.Size = new Size(153, 46);
+            btnLuu.TabIndex = 9;
+            btnLuu.Text = "Lưu";
+            btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.Click += btnLuu_Click;
             // 
             // btnHuy
             // 
-            btnHuy.Location = new Point(479, 335);
+            btnHuy.Location = new Point(778, 536);
+            btnHuy.Margin = new Padding(5);
             btnHuy.Name = "btnHuy";
-            btnHuy.Size = new Size(94, 29);
+            btnHuy.Size = new Size(153, 46);
             btnHuy.TabIndex = 10;
             btnHuy.Text = "Hủy";
             btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.Click += btnHuy_Click;
             // 
-            // label
+            // lblMaHoaDon
             // 
-            label.AutoSize = true;
-            label.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label.Location = new Point(155, 75);
-            label.Name = "label";
-            label.Size = new Size(114, 25);
-            label.TabIndex = 11;
-            label.Text = "Mã hóa đơn";
+            lblMaHoaDon.AutoSize = true;
+            lblMaHoaDon.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            lblMaHoaDon.Location = new Point(252, 120);
+            lblMaHoaDon.Margin = new Padding(5, 0, 5, 0);
+            lblMaHoaDon.Name = "lblMaHoaDon";
+            lblMaHoaDon.Size = new Size(182, 40);
+            lblMaHoaDon.TabIndex = 11;
+            lblMaHoaDon.Text = "Mã hóa đơn";
             // 
-            // txtmaHoaDon
+            // txtMaHoaDon
             // 
-            txtmaHoaDon.Location = new Point(326, 73);
-            txtmaHoaDon.Name = "txtmaHoaDon";
-            txtmaHoaDon.Size = new Size(247, 27);
-            txtmaHoaDon.TabIndex = 12;
+            txtMaHoaDon.Location = new Point(530, 117);
+            txtMaHoaDon.Margin = new Padding(5);
+            txtMaHoaDon.Name = "txtMaHoaDon";
+            txtMaHoaDon.Size = new Size(399, 39);
+            txtMaHoaDon.TabIndex = 12;
             // 
-            // dateTimengayLap
+            // dateNgayLap
             // 
-            dateTimengayLap.Location = new Point(326, 181);
-            dateTimengayLap.Name = "dateTimengayLap";
-            dateTimengayLap.Size = new Size(247, 27);
-            dateTimengayLap.TabIndex = 19;
+            dateNgayLap.Location = new Point(530, 290);
+            dateNgayLap.Margin = new Padding(5);
+            dateNgayLap.Name = "dateNgayLap";
+            dateNgayLap.Size = new Size(399, 39);
+            dateNgayLap.TabIndex = 19;
             // 
-            // txt
+            // lblMaNhanVien
             // 
-            txt.AutoSize = true;
-            txt.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            txt.Location = new Point(155, 129);
-            txt.Name = "txt";
-            txt.Size = new Size(133, 25);
-            txt.TabIndex = 14;
-            txt.Text = "Mã nhân viên ";
+            lblMaNhanVien.AutoSize = true;
+            lblMaNhanVien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            lblMaNhanVien.Location = new Point(252, 206);
+            lblMaNhanVien.Margin = new Padding(5, 0, 5, 0);
+            lblMaNhanVien.Name = "lblMaNhanVien";
+            lblMaNhanVien.Size = new Size(204, 40);
+            lblMaNhanVien.TabIndex = 14;
+            lblMaNhanVien.Text = "Mã nhân viên";
             // 
-            // txtmaNhanVien
+            // txtMaNhanVien
             // 
-            txtmaNhanVien.Location = new Point(326, 127);
-            txtmaNhanVien.Name = "txtmaNhanVien";
-            txtmaNhanVien.Size = new Size(247, 27);
-            txtmaNhanVien.TabIndex = 15;
+            txtMaNhanVien.Location = new Point(530, 203);
+            txtMaNhanVien.Margin = new Padding(5);
+            txtMaNhanVien.Name = "txtMaNhanVien";
+            txtMaNhanVien.Size = new Size(399, 39);
+            txtMaNhanVien.TabIndex = 15;
             // 
-            // label4
+            // lblNgayLap
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label4.Location = new Point(155, 181);
-            label4.Name = "label4";
-            label4.Size = new Size(88, 25);
-            label4.TabIndex = 16;
-            label4.Text = "Ngày lập";
+            lblNgayLap.AutoSize = true;
+            lblNgayLap.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            lblNgayLap.Location = new Point(252, 290);
+            lblNgayLap.Margin = new Padding(5, 0, 5, 0);
+            lblNgayLap.Name = "lblNgayLap";
+            lblNgayLap.Size = new Size(140, 40);
+            lblNgayLap.TabIndex = 16;
+            lblNgayLap.Text = "Ngày lập";
             // 
-            // label3
+            // lblTongTien
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label3.Location = new Point(155, 235);
-            label3.Name = "label3";
-            label3.Size = new Size(149, 25);
-            label3.TabIndex = 17;
-            label3.Text = "Tổng thành tiền";
+            lblTongTien.AutoSize = true;
+            lblTongTien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            lblTongTien.Location = new Point(252, 376);
+            lblTongTien.Margin = new Padding(5, 0, 5, 0);
+            lblTongTien.Name = "lblTongTien";
+            lblTongTien.Size = new Size(236, 40);
+            lblTongTien.TabIndex = 17;
+            lblTongTien.Text = "Tổng thành tiền";
             // 
-            // txttongThanhTien
+            // txtTongTien
             // 
-            txttongThanhTien.Location = new Point(326, 233);
-            txttongThanhTien.Name = "txttongThanhTien";
-            txttongThanhTien.Size = new Size(247, 27);
-            txttongThanhTien.TabIndex = 18;
+            txtTongTien.Location = new Point(530, 373);
+            txtTongTien.Margin = new Padding(5);
+            txtTongTien.Name = "txtTongTien";
+            txtTongTien.Size = new Size(399, 39);
+            txtTongTien.TabIndex = 18;
             // 
             // FormThemHoaDon
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(dateTimengayLap);
-            Controls.Add(txttongThanhTien);
-            Controls.Add(label3);
-            Controls.Add(label4);
-            Controls.Add(txtmaNhanVien);
-            Controls.Add(txt);
-            Controls.Add(txtmaHoaDon);
-            Controls.Add(label);
+            ClientSize = new Size(1300, 720);
+            Controls.Add(dateNgayLap);
+            Controls.Add(txtTongTien);
+            Controls.Add(lblTongTien);
+            Controls.Add(lblNgayLap);
+            Controls.Add(txtMaNhanVien);
+            Controls.Add(lblMaNhanVien);
+            Controls.Add(txtMaHoaDon);
+            Controls.Add(lblMaHoaDon);
             Controls.Add(btnHuy);
-            Controls.Add(this.btnLuu);
+            Controls.Add(btnLuu);
+            Margin = new Padding(5);
             Name = "FormThemHoaDon";
-            Text = "FormThemHoaDon";
+            Text = "Thêm Hóa Đơn";
+            Load += FormThemHoaDon_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Label label2;
-        private TextBox textBox3;
-        private DateTimePicker dateTimePicker1;
-        private Label label5;
-        private Button button1;
+        private Button btnLuu;
         private Button btnHuy;
-        private Label label;
-        private TextBox txtmaHoaDon;
-        private DateTimePicker dateTimengayLap;
-        private Label txt;
-        private TextBox txtmaNhanVien;
-        private Label label4;
-        private Label label3;
-        private TextBox txttongThanhTien;
+        private Label lblMaHoaDon;
+        private TextBox txtMaHoaDon;
+        private DateTimePicker dateNgayLap;
+        private Label lblMaNhanVien;
+        private TextBox txtMaNhanVien;
+        private Label lblNgayLap;
+        private Label lblTongTien;
+        private TextBox txtTongTien;
     }
 }
