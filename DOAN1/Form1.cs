@@ -76,15 +76,44 @@ namespace DOAN1
 
         private void btnChiTietHoaDon_Click(object sender, EventArgs e)
         {
+           
+        }
+        enum TrangDangXem { HoaDon, ChiTiet }
+        TrangDangXem trangHienTai = TrangDangXem.HoaDon;
+
+        private void tsThem_Click(object sender, EventArgs e)
+        {
+            if (trangHienTai == TrangDangXem.HoaDon)
+            {
+                // Thêm hóa đơn mới
+                FormThemHoaDon f = new FormThemHoaDon();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    LoadHoaDon(); // Load lại
+                }
+            }
+            else if (trangHienTai == TrangDangXem.ChiTiet)
+            {
+                if (dgvHoaDon.CurrentRow != null)
+                {
+                    string maHD = dgvHoaDon.CurrentRow.Cells["maHoaDon"].Value.ToString();
+                    FormThemChiTiet f = new FormThemChiTiet(maHD); // Truyền mã hóa đơn để thêm đúng
+                    if (f.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadChiTietHoaDon(maHD);
+                    }
+                }
+            }
+        }
+
+        private void tsChitiet_Click(object sender, EventArgs e)
+        {
             if (dgvHoaDon.CurrentRow != null)
             {
                 string maHD = dgvHoaDon.CurrentRow.Cells["maHoaDon"].Value.ToString();
-                LoadChiTietHoaDon(maHD); // gọi hàm đẩy dữ liệu chi tiết
+                LoadChiTietHoaDon(maHD);
                 panelChiTiet.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn một hóa đơn.");
+                trangHienTai = TrangDangXem.ChiTiet; // Chuyển trạng thái
             }
         }
     }

@@ -28,15 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label = new Label();
-            txtmaHoaDon = new TextBox();
             btnChiTietHoaDon = new Button();
-            txtmaNhanVien = new TextBox();
-            txt = new Label();
-            txttongThanhTien = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
-            dateTimengayLap = new DateTimePicker();
             label1 = new Label();
             dgvHoaDon = new DataGridView();
             toolStrip1 = new ToolStrip();
@@ -55,83 +47,15 @@
             ((System.ComponentModel.ISupportInitialize)dgvChiTietHoaDon).BeginInit();
             SuspendLayout();
             // 
-            // label
-            // 
-            label.AutoSize = true;
-            label.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label.Location = new Point(837, 75);
-            label.Name = "label";
-            label.Size = new Size(114, 25);
-            label.TabIndex = 0;
-            label.Text = "Mã hóa đơn";
-            // 
-            // txtmaHoaDon
-            // 
-            txtmaHoaDon.Location = new Point(1008, 73);
-            txtmaHoaDon.Name = "txtmaHoaDon";
-            txtmaHoaDon.Size = new Size(247, 27);
-            txtmaHoaDon.TabIndex = 1;
-            // 
             // btnChiTietHoaDon
             // 
-            btnChiTietHoaDon.Location = new Point(1091, 300);
+            btnChiTietHoaDon.Location = new Point(1232, 478);
             btnChiTietHoaDon.Name = "btnChiTietHoaDon";
             btnChiTietHoaDon.Size = new Size(94, 29);
             btnChiTietHoaDon.TabIndex = 2;
             btnChiTietHoaDon.Text = "Chi Tiết Hóa Đơn";
             btnChiTietHoaDon.UseVisualStyleBackColor = true;
             btnChiTietHoaDon.Click += btnChiTietHoaDon_Click;
-            // 
-            // txtmaNhanVien
-            // 
-            txtmaNhanVien.Location = new Point(1008, 127);
-            txtmaNhanVien.Name = "txtmaNhanVien";
-            txtmaNhanVien.Size = new Size(247, 27);
-            txtmaNhanVien.TabIndex = 4;
-            // 
-            // txt
-            // 
-            txt.AutoSize = true;
-            txt.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            txt.Location = new Point(837, 129);
-            txt.Name = "txt";
-            txt.Size = new Size(133, 25);
-            txt.TabIndex = 3;
-            txt.Text = "Mã nhân viên ";
-            // 
-            // txttongThanhTien
-            // 
-            txttongThanhTien.Location = new Point(1008, 233);
-            txttongThanhTien.Name = "txttongThanhTien";
-            txttongThanhTien.Size = new Size(247, 27);
-            txttongThanhTien.TabIndex = 8;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label3.Location = new Point(837, 235);
-            label3.Name = "label3";
-            label3.Size = new Size(149, 25);
-            label3.TabIndex = 7;
-            label3.Text = "Tổng thành tiền";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label4.Location = new Point(837, 181);
-            label4.Name = "label4";
-            label4.Size = new Size(88, 25);
-            label4.TabIndex = 5;
-            label4.Text = "Ngày lập";
-            // 
-            // dateTimengayLap
-            // 
-            dateTimengayLap.Location = new Point(1008, 181);
-            dateTimengayLap.Name = "dateTimengayLap";
-            dateTimengayLap.Size = new Size(247, 27);
-            dateTimengayLap.TabIndex = 9;
             // 
             // label1
             // 
@@ -147,10 +71,10 @@
             // 
             dgvHoaDon.AllowUserToResizeRows = false;
             dgvHoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHoaDon.Location = new Point(80, 75);
+            dgvHoaDon.Location = new Point(0, 67);
             dgvHoaDon.Name = "dgvHoaDon";
             dgvHoaDon.RowHeadersWidth = 51;
-            dgvHoaDon.Size = new Size(609, 254);
+            dgvHoaDon.Size = new Size(1384, 400);
             dgvHoaDon.TabIndex = 11;
             dgvHoaDon.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -171,6 +95,7 @@
             tsThem.Name = "tsThem";
             tsThem.Size = new Size(70, 24);
             tsThem.Text = "Thêm";
+            tsThem.Click += tsThem_Click;
             // 
             // tsSua
             // 
@@ -200,6 +125,7 @@
             tsChitiet.Name = "tsChitiet";
             tsChitiet.Size = new Size(112, 24);
             tsChitiet.Text = "Xem chi tiết";
+            tsChitiet.Click += tsChitiet_Click;
             // 
             // tslammoi
             // 
@@ -213,9 +139,9 @@
             // 
             panelChiTiet.Controls.Add(dgvChiTietHoaDon);
             panelChiTiet.Controls.Add(label2);
-            panelChiTiet.Location = new Point(43, 416);
+            panelChiTiet.Location = new Point(0, 513);
             panelChiTiet.Name = "panelChiTiet";
-            panelChiTiet.Size = new Size(1224, 443);
+            panelChiTiet.Size = new Size(1372, 364);
             panelChiTiet.TabIndex = 13;
             panelChiTiet.Visible = false;
             // 
@@ -223,10 +149,10 @@
             // 
             dgvChiTietHoaDon.AllowUserToResizeRows = false;
             dgvChiTietHoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvChiTietHoaDon.Location = new Point(37, 119);
+            dgvChiTietHoaDon.Location = new Point(0, 68);
             dgvChiTietHoaDon.Name = "dgvChiTietHoaDon";
             dgvChiTietHoaDon.RowHeadersWidth = 51;
-            dgvChiTietHoaDon.Size = new Size(609, 270);
+            dgvChiTietHoaDon.Size = new Size(1384, 300);
             dgvChiTietHoaDon.TabIndex = 14;
             // 
             // label2
@@ -247,15 +173,7 @@
             Controls.Add(panelChiTiet);
             Controls.Add(toolStrip1);
             Controls.Add(label1);
-            Controls.Add(dateTimengayLap);
-            Controls.Add(txttongThanhTien);
-            Controls.Add(label3);
-            Controls.Add(label4);
-            Controls.Add(txtmaNhanVien);
-            Controls.Add(txt);
             Controls.Add(btnChiTietHoaDon);
-            Controls.Add(txtmaHoaDon);
-            Controls.Add(label);
             Controls.Add(dgvHoaDon);
             Name = "Form1";
             Load += Form1_Load;
@@ -270,16 +188,7 @@
         }
 
         #endregion
-
-        private Label label;
-        private TextBox txtmaHoaDon;
         private Button btnChiTietHoaDon;
-        private TextBox txtmaNhanVien;
-        private Label txt;
-        private TextBox txttongThanhTien;
-        private Label label3;
-        private Label label4;
-        private DateTimePicker dateTimengayLap;
         private Label label1;
         private DataGridView dgvHoaDon;
         private ToolStrip toolStrip1;
