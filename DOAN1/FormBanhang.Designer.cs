@@ -51,6 +51,7 @@
             tsDoanhthu = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             tsLammoi = new ToolStripButton();
+            btnHuy = new Button();
             grbThongtinchung.SuspendLayout();
             grbThongTinSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).BeginInit();
@@ -97,9 +98,9 @@
             lblTongThanhTien.AutoSize = true;
             lblTongThanhTien.Location = new Point(793, 34);
             lblTongThanhTien.Name = "lblTongThanhTien";
-            lblTongThanhTien.Size = new Size(50, 20);
+            lblTongThanhTien.Size = new Size(113, 20);
             lblTongThanhTien.TabIndex = 4;
-            lblTongThanhTien.Text = "label1";
+            lblTongThanhTien.Text = "Tổng thành tiền";
             // 
             // dtpNgayTao
             // 
@@ -163,6 +164,7 @@
             nudsoluong.Name = "nudsoluong";
             nudsoluong.Size = new Size(101, 27);
             nudsoluong.TabIndex = 7;
+            nudsoluong.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // txtTenSanpham
             // 
@@ -203,9 +205,9 @@
             // 
             // btnTaoHoaDon
             // 
-            btnTaoHoaDon.Location = new Point(429, 436);
+            btnTaoHoaDon.Location = new Point(231, 436);
             btnTaoHoaDon.Name = "btnTaoHoaDon";
-            btnTaoHoaDon.Size = new Size(263, 29);
+            btnTaoHoaDon.Size = new Size(263, 43);
             btnTaoHoaDon.TabIndex = 9;
             btnTaoHoaDon.Text = "Tạo hóa đơn";
             btnTaoHoaDon.UseVisualStyleBackColor = true;
@@ -266,12 +268,24 @@
             tsLammoi.Name = "tsLammoi";
             tsLammoi.Size = new Size(91, 24);
             tsLammoi.Text = "Làm mới";
+            tsLammoi.Click += tsLammoi_Click;
+            // 
+            // btnHuy
+            // 
+            btnHuy.Location = new Point(715, 436);
+            btnHuy.Name = "btnHuy";
+            btnHuy.Size = new Size(263, 43);
+            btnHuy.TabIndex = 12;
+            btnHuy.Text = "HỦY";
+            btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.Click += btnHuy_Click;
             // 
             // FormBanhang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1148, 504);
+            Controls.Add(btnHuy);
             Controls.Add(toolStrip1);
             Controls.Add(btnXoaSanPham);
             Controls.Add(btnTaoHoaDon);
@@ -318,5 +332,6 @@
         private ToolStripButton tsDoanhthu;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton tsLammoi;
+        private Button btnHuy;
     }
 }

@@ -29,7 +29,7 @@ namespace DOAN1
         private void FormLichSu_Load(object sender, EventArgs e)
         {
             cbLoaitim.Items.AddRange(new string[] {
-        "Tất cả", "Mã sản phẩm", "Mã hóa đơn", "Mã khách hàng", "Mã nhân viên"
+        "Tất cả", "Mã hóa đơn"
     });
             cbLoaitim.SelectedIndex = 0;
 
@@ -38,6 +38,7 @@ namespace DOAN1
 
             LoadLichSu();
         }
+
         private void LoadLichSu(string keyword = "", string loaiTim = "Tất cả", DateTime? tuNgay = null, DateTime? denNgay = null)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -45,23 +46,9 @@ namespace DOAN1
                 conn.Open();
                 string query = "SELECT * FROM lichsu WHERE 1=1";
 
-                if (!string.IsNullOrEmpty(keyword) && loaiTim != "Tất cả")
+                if (!string.IsNullOrEmpty(keyword) && loaiTim == "Mã hóa đơn")
                 {
-                    switch (loaiTim)
-                    {
-                        case "Mã sản phẩm":
-                            query += " AND maSanPham LIKE @kw";
-                            break;
-                        case "Mã hóa đơn":
-                            query += " AND maHoaDon LIKE @kw";
-                            break;
-                        case "Mã khách hàng":
-                            query += " AND maKhachHang LIKE @kw";
-                            break;
-                        case "Mã nhân viên":
-                            query += " AND maNhanVien LIKE @kw";
-                            break;
-                    }
+                    query += " AND maHoaDon LIKE @kw";
                 }
 
                 if (tuNgay != null && denNgay != null)
@@ -71,13 +58,13 @@ namespace DOAN1
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
-                if (!string.IsNullOrEmpty(keyword) && loaiTim != "Tất cả")
+                if (!string.IsNullOrEmpty(keyword) && loaiTim == "Mã hóa đơn")
                     cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
 
                 if (tuNgay != null && denNgay != null)
                 {
-                    cmd.Parameters.AddWithValue("@from", tuNgay);
-                    cmd.Parameters.AddWithValue("@to", denNgay);
+                    cmd.Parameters.AddWithValue("@from", tuNgay.Value.Date);
+                    cmd.Parameters.AddWithValue("@to", denNgay.Value.Date.AddDays(1).AddTicks(-1)); // đến cuối ngày
                 }
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -86,6 +73,8 @@ namespace DOAN1
                 dgvLichsu.DataSource = dt;
             }
         }
+
+
 
 
         private void btnTimkiem_Click(object sender, EventArgs e)

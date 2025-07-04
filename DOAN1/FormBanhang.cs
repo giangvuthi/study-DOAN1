@@ -111,21 +111,32 @@ namespace DOAN1
         private string TaoMaHoaDonTuDong()
         {
             string maMoi = "HD001";
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                string query = "SELECT maHoaDon FROM hoadon ORDER BY maHoaDon DESC LIMIT 1";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                object result = cmd.ExecuteScalar();
 
-                if (result != null)
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
-                    string maCu = result.ToString(); // Ví dụ: "HD012"
-                    int so = int.Parse(maCu.Substring(2)); // Cắt bỏ "HD" → còn "012"
-                    so++; // Tăng lên 1
-                    maMoi = "HD" + so.ToString("D3"); // format 3 chữ số
+                    conn.Open();
+                    string query = "SELECT maHoaDon FROM hoadon ORDER BY maHoaDon DESC LIMIT 1";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        string maCu = result.ToString(); // Ví dụ: "HD012"
+                        if (maCu.Length >= 3 && int.TryParse(maCu.Substring(2), out int so))
+                        {
+                            so++;
+                            maMoi = "HD" + so.ToString("D3"); // format 3 chữ số
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tạo mã hóa đơn tự động: " + ex.Message);
+            }
+
             return maMoi;
         }
 
@@ -167,13 +178,38 @@ namespace DOAN1
 
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
+            int soLuongThem = (int)nudsoluong.Value;
+
+            if (soLuongThem < 1)
+            {
+                MessageBox.Show("Số lượng phải lớn hơn 0.");
+                return;
+            }
+
+            int tonKho = int.Parse(txtTonKho.Text);
             string maSP = cbMasanpham.SelectedValue.ToString();
+
+            // Tính tổng số lượng của sản phẩm này đã có trong dgv
+            int soLuongDaThem = 0;
+            foreach (DataGridViewRow row in dgvThongTinSanPham.Rows)
+            {
+                if (row.Cells["MaSP"].Value.ToString() == maSP)
+                {
+                    soLuongDaThem += Convert.ToInt32(row.Cells["SoLuong"].Value);
+                }
+            }
+
+            if (soLuongThem + soLuongDaThem > tonKho)
+            {
+                MessageBox.Show("Số lượng vượt quá số lượng tồn kho hiện tại!");
+                return;
+            }
+
             string tenSP = txtTenSanpham.Text;
             decimal donGia = decimal.Parse(txtDonGia.Text);
-            int soLuong = (int)nudsoluong.Value;
-            decimal thanhTien = donGia * soLuong;
+            decimal thanhTien = donGia * soLuongThem;
 
-            dgvThongTinSanPham.Rows.Add(maSP, tenSP, donGia, soLuong, thanhTien);
+            dgvThongTinSanPham.Rows.Add(maSP, tenSP, donGia, soLuongThem, thanhTien);
 
             TinhTongTien();
         }
@@ -241,10 +277,21 @@ namespace DOAN1
                         decimal donGia = Convert.ToDecimal(row.Cells["DonGia"].Value);
                         decimal thanhTien = Convert.ToDecimal(row.Cells["ThanhTien"].Value);
 
-                        // Thêm chi tiết
+                        // 0. Kiểm tra tồn kho
+                        string sqlCheckTonKho = "SELECT soLuongTon FROM tt_sanpham WHERE maSanPham = @maSP";
+                        MySqlCommand cmdCheck = new MySqlCommand(sqlCheckTonKho, conn, tran);
+                        cmdCheck.Parameters.AddWithValue("@maSP", maSP);
+                        int soLuongTon = Convert.ToInt32(cmdCheck.ExecuteScalar());
+
+                        if (soLuong > soLuongTon)
+                        {
+                            throw new Exception($"Sản phẩm {maSP} không đủ tồn kho. Còn lại: {soLuongTon}, cần: {soLuong}");
+                        }
+
+                        // 1. Thêm chi tiết hóa đơn
                         string sqlCT = @"INSERT INTO tt_chitiet_hoadon 
-                    (maHoaDon, maSanPham, soLuong, donGiaBan, thanhTien) 
-                    VALUES (@maHD, @maSP, @soLuong, @donGia, @thanhTien)";
+        (maHoaDon, maSanPham, soLuong, donGiaBan, thanhTien) 
+        VALUES (@maHD, @maSP, @soLuong, @donGia, @thanhTien)";
                         MySqlCommand cmdCT = new MySqlCommand(sqlCT, conn, tran);
                         cmdCT.Parameters.AddWithValue("@maHD", maHD);
                         cmdCT.Parameters.AddWithValue("@maSP", maSP);
@@ -253,10 +300,9 @@ namespace DOAN1
                         cmdCT.Parameters.AddWithValue("@thanhTien", thanhTien);
                         cmdCT.ExecuteNonQuery();
 
-
-                        // Ghi vào bảng lịch sử
+                        // 2. Ghi vào bảng lịch sử
                         string sqlLS = @"INSERT INTO lichsu (maSanPham, soLuong, Loai, thoiGian, maHoaDon)
-                 VALUES (@maSP, @soLuong, @loai, @thoigian, @maHD)";
+        VALUES (@maSP, @soLuong, @loai, @thoigian, @maHD)";
                         MySqlCommand cmdLS = new MySqlCommand(sqlLS, conn, tran);
                         cmdLS.Parameters.AddWithValue("@maSP", maSP);
                         cmdLS.Parameters.AddWithValue("@soLuong", soLuong);
@@ -264,15 +310,17 @@ namespace DOAN1
                         cmdLS.Parameters.AddWithValue("@thoigian", DateTime.Now);
                         cmdLS.Parameters.AddWithValue("@maHD", maHD);
                         cmdLS.ExecuteNonQuery();
-                        // Trừ số lượng tồn
+
+                        // 3. Trừ tồn kho
                         string sqlUpdate = @"UPDATE tt_sanpham 
-                                     SET soLuongTon = soLuongTon - @soLuong 
-                                     WHERE maSanPham = @maSP";
+                         SET soLuongTon = soLuongTon - @soLuong 
+                         WHERE maSanPham = @maSP";
                         MySqlCommand cmdUpdate = new MySqlCommand(sqlUpdate, conn, tran);
                         cmdUpdate.Parameters.AddWithValue("@soLuong", soLuong);
                         cmdUpdate.Parameters.AddWithValue("@maSP", maSP);
                         cmdUpdate.ExecuteNonQuery();
                     }
+
 
                     tran.Commit();
                     MessageBox.Show("Tạo hóa đơn thành công!");
@@ -284,9 +332,21 @@ namespace DOAN1
                 }
                 catch (Exception ex)
                 {
-                    tran.Rollback();
+                    try
+                    {
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            tran.Rollback(); // chỉ rollback nếu connection còn mở
+                        }
+                    }
+                    catch (Exception rollbackEx)
+                    {
+                        MessageBox.Show("Lỗi khi rollback: " + rollbackEx.Message);
+                    }
+
                     MessageBox.Show("Lỗi khi tạo hóa đơn: " + ex.Message);
                 }
+
             }
         }
 
@@ -339,13 +399,57 @@ namespace DOAN1
 
         private void doanhthu_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void tsDoanhthu_Click(object sender, EventArgs e)
         {
             FormDoanhThu f = new FormDoanhThu();
             f.ShowDialog();
+        }
+        private void ResetForm(bool reloadDataFromDB)
+        {
+            txtMaHd.Text = TaoMaHoaDonTuDong();
+
+            if (reloadDataFromDB)
+            {
+                LoadKhachHang();
+                LoadSanPham();
+                LoadNhanVien();
+            }
+
+            dgvThongTinSanPham.Rows.Clear();
+            lblTongThanhTien.Text = "";
+            txtTenSanpham.Clear();
+            txtDonGia.Clear();
+            txtTonKho.Clear();
+            nudsoluong.Value = 1;
+            TaoCauTrucBang();
+
+            // Đặt combobox về item đầu (nếu có)
+            if (cbmakhachhang.Items.Count > 0) cbmakhachhang.SelectedIndex = 0;
+            if (cbMasanpham.Items.Count > 0) cbMasanpham.SelectedIndex = 0;
+            if (cbManv.Items.Count > 0) cbManv.SelectedIndex = 0;
+        }
+
+        private void tsLammoi_Click(object sender, EventArgs e)
+        {
+            ResetForm(true);
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+        "Bạn có chắc chắn muốn hủy tạo đơn hiện tại không?",
+        "Xác nhận hủy đơn",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                ResetForm(false); // KHÔNG reload DB
+                MessageBox.Show("Đã hủy đơn hàng.");
+            }
         }
     }
 }
