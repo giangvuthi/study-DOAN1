@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -323,7 +324,11 @@ namespace DOAN1
 
 
                     tran.Commit();
-                    MessageBox.Show("Tạo hóa đơn thành công!");
+                    if (MessageBox.Show("Bạn có muốn in hóa đơn không?", "In hóa đơn", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        printPreviewDialog1.Document = printDocument1;
+                        printPreviewDialog1.ShowDialog();
+                    }
 
                     // Làm mới
                     dgvThongTinSanPham.Rows.Clear();
@@ -451,5 +456,42 @@ namespace DOAN1
                 MessageBox.Show("Đã hủy đơn hàng.");
             }
         }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Font font = new Font("Courier New", 9); // Dễ canh hàng hơn
+            float y = 10;
+            float leftMargin = 10;
+
+            g.DrawString("CỬA HÀNG ABC", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, leftMargin, y);
+            y += 20;
+            g.DrawString($"Mã HĐ: {txtMaHd.Text}", font, Brushes.Black, leftMargin, y); y += 15;
+            g.DrawString($"Ngày: {dtpNgayTao.Value:dd/MM/yyyy}", font, Brushes.Black, leftMargin, y); y += 15;
+            g.DrawString($"Khách: {cbmakhachhang.Text}", font, Brushes.Black, leftMargin, y); y += 15;
+            g.DrawString($"NV: {cbManv.Text}", font, Brushes.Black, leftMargin, y); y += 20;
+
+            g.DrawString("----------------------------------------", font, Brushes.Black, leftMargin, y); y += 15;
+            g.DrawString("SP              SL x DG               TT", font, Brushes.Black, leftMargin, y); y += 15;
+            g.DrawString("----------------------------------------", font, Brushes.Black, leftMargin, y); y += 15;
+
+            foreach (DataGridViewRow row in dgvThongTinSanPham.Rows)
+            {
+                string tenSP = row.Cells["TenSP"].Value.ToString();
+                int sl = Convert.ToInt32(row.Cells["SoLuong"].Value);
+                decimal dg = Convert.ToDecimal(row.Cells["DonGia"].Value);
+                decimal tt = Convert.ToDecimal(row.Cells["ThanhTien"].Value);
+
+                string dong = $"{tenSP,-10} {sl}x{dg:N0} = {tt:N0}";
+                g.DrawString(dong, font, Brushes.Black, leftMargin, y);
+                y += 15;
+            }
+
+            g.DrawString("----------------------------------------", font, Brushes.Black, leftMargin, y); y += 15;
+            g.DrawString("TỔNG: " + lblTongThanhTien.Text, new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, leftMargin, y); y += 25;
+
+            g.DrawString("CẢM ƠN QUÝ KHÁCH!", font, Brushes.Black, leftMargin + 20, y);
+        }
+
     }
 }

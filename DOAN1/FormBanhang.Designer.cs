@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBanhang));
             grbThongtinchung = new GroupBox();
             cbManv = new ComboBox();
             btnThemKhachHang = new Button();
@@ -52,6 +53,8 @@
             toolStripSeparator2 = new ToolStripSeparator();
             tsLammoi = new ToolStripButton();
             btnHuy = new Button();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
             grbThongtinchung.SuspendLayout();
             grbThongTinSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).BeginInit();
@@ -209,7 +212,7 @@
             btnTaoHoaDon.Name = "btnTaoHoaDon";
             btnTaoHoaDon.Size = new Size(263, 43);
             btnTaoHoaDon.TabIndex = 9;
-            btnTaoHoaDon.Text = "Tạo hóa đơn";
+            btnTaoHoaDon.Text = "Thanh toán";
             btnTaoHoaDon.UseVisualStyleBackColor = true;
             btnTaoHoaDon.Click += btnTaoHoaDon_Click;
             // 
@@ -280,6 +283,20 @@
             btnHuy.UseVisualStyleBackColor = true;
             btnHuy.Click += btnHuy_Click;
             // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
+            // 
             // FormBanhang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -333,5 +350,7 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton tsLammoi;
         private Button btnHuy;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }
