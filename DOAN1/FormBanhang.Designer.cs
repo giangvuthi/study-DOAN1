@@ -45,10 +45,17 @@
             dgvThongTinSanPham = new DataGridView();
             btnTaoHoaDon = new Button();
             btnXoaSanPham = new Button();
+            toolStrip1 = new ToolStrip();
+            tsLichsubanhang = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tsDoanhthu = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            tsLammoi = new ToolStripButton();
             grbThongtinchung.SuspendLayout();
             grbThongTinSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvThongTinSanPham).BeginInit();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // grbThongtinchung
@@ -214,11 +221,58 @@
             btnXoaSanPham.UseVisualStyleBackColor = true;
             btnXoaSanPham.Click += btnXoaSanPham_Click;
             // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsLichsubanhang, toolStripSeparator1, tsDoanhthu, toolStripSeparator2, tsLammoi });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1148, 27);
+            toolStrip1.TabIndex = 11;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tsLichsubanhang
+            // 
+            tsLichsubanhang.Image = Properties.Resources.icons8_detail_48;
+            tsLichsubanhang.ImageTransparentColor = Color.Magenta;
+            tsLichsubanhang.Name = "tsLichsubanhang";
+            tsLichsubanhang.Size = new Size(163, 24);
+            tsLichsubanhang.Text = "Lịch sử tạo hóa đơn";
+            tsLichsubanhang.Click += tsLichsubanhang_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 27);
+            // 
+            // tsDoanhthu
+            // 
+            tsDoanhthu.Image = Properties.Resources.icons8_detail_50;
+            tsDoanhthu.ImageTransparentColor = Color.Magenta;
+            tsDoanhthu.Name = "tsDoanhthu";
+            tsDoanhthu.Size = new Size(102, 24);
+            tsDoanhthu.Text = "Doanh thu";
+            tsDoanhthu.Click += tsDoanhthu_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 27);
+            // 
+            // tsLammoi
+            // 
+            tsLammoi.Image = Properties.Resources.icons8_refresh;
+            tsLammoi.ImageTransparentColor = Color.Magenta;
+            tsLammoi.Name = "tsLammoi";
+            tsLammoi.Size = new Size(91, 24);
+            tsLammoi.Text = "Làm mới";
+            // 
             // FormBanhang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1148, 504);
+            Controls.Add(toolStrip1);
             Controls.Add(btnXoaSanPham);
             Controls.Add(btnTaoHoaDon);
             Controls.Add(dgvThongTinSanPham);
@@ -233,7 +287,10 @@
             grbThongTinSanPham.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvThongTinSanPham).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -255,5 +312,11 @@
         private TextBox txtTonKho;
         private ComboBox cbManv;
         private Button btnXoaSanPham;
+        private ToolStrip toolStrip1;
+        private ToolStripButton tsLichsubanhang;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton tsDoanhthu;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton tsLammoi;
     }
 }

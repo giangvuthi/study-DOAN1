@@ -253,6 +253,17 @@ namespace DOAN1
                         cmdCT.Parameters.AddWithValue("@thanhTien", thanhTien);
                         cmdCT.ExecuteNonQuery();
 
+
+                        // Ghi vào bảng lịch sử
+                        string sqlLS = @"INSERT INTO lichsu (maSanPham, soLuong, Loai, thoiGian, maHoaDon)
+                 VALUES (@maSP, @soLuong, @loai, @thoigian, @maHD)";
+                        MySqlCommand cmdLS = new MySqlCommand(sqlLS, conn, tran);
+                        cmdLS.Parameters.AddWithValue("@maSP", maSP);
+                        cmdLS.Parameters.AddWithValue("@soLuong", soLuong);
+                        cmdLS.Parameters.AddWithValue("@loai", "Tạo hóa đơn");
+                        cmdLS.Parameters.AddWithValue("@thoigian", DateTime.Now);
+                        cmdLS.Parameters.AddWithValue("@maHD", maHD);
+                        cmdLS.ExecuteNonQuery();
                         // Trừ số lượng tồn
                         string sqlUpdate = @"UPDATE tt_sanpham 
                                      SET soLuongTon = soLuongTon - @soLuong 
@@ -318,6 +329,23 @@ namespace DOAN1
         private void dgvThongTinSanPham_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             dgvThongTinSanPham.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void tsLichsubanhang_Click(object sender, EventArgs e)
+        {
+            FormLichSu lichSuForm = new FormLichSu();
+            lichSuForm.ShowDialog();
+        }
+
+        private void doanhthu_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void tsDoanhthu_Click(object sender, EventArgs e)
+        {
+            FormDoanhThu f = new FormDoanhThu();
+            f.ShowDialog();
         }
     }
 }
