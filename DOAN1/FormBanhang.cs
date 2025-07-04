@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+ //try 
 namespace DOAN1
 {
     public partial class FormBanhang : Form
