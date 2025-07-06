@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo;
+using Microsoft.Reporting.WinForms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -21,37 +22,75 @@ namespace DOAN1
 
         }
 
+
         private void FormThongKe_Load(object sender, EventArgs e)
         {
 
         }
-        private void LoadReport()
+        private void LoadThongKeTongQuan()
         {
-            // Tạo ReportViewer
-            ReportViewer reportViewer = new ReportViewer();
-            reportViewer.Dock = DockStyle.Fill;
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-            this.Controls.Add(reportViewer);
-
-            // Load dữ liệu từ MySQL
-            string connStr = "server=localhost;user id=root;password=;database=qlbanhang";
-            string query = "SELECT * FROM hoadon";  // bảng hóa đơn của bạn
-
-            DataTable dt = new DataTable();
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (MySqlConnection conn = new MySqlConnection("server=localhost;user=root;database=qlbanhang;password=;"))
             {
                 conn.Open();
-                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
-                da.Fill(dt);
+
+                // Tổng sản phẩm đã bán
+                MySqlCommand cmdSPB = new MySqlCommand("SELECT SUM(soLuong) FROM tt_chitiet_hoadon", conn);
+                int tongSPBan = Convert.ToInt32(cmdSPB.ExecuteScalar() ?? 0);
+                lbltongspb.Text = "Tổng sản phẩm bán: " + tongSPBan;
+
+                // Tổng doanh thu
+                MySqlCommand cmdDT = new MySqlCommand("SELECT SUM(thanhTien) FROM hoadon", conn);
+                decimal tongDoanhThu = Convert.ToDecimal(cmdDT.ExecuteScalar() ?? 0);
+                lbltongdoanhthu.Text = "Tổng doanh thu: " + tongDoanhThu.ToString("N0") + " VNĐ";
+
+                // Tổng tiền nhập (chỉ nhập - NhapXuat = 1)
+                string queryNhap = @"
+            SELECT SUM(ctnx.soLuong * sp.donGiaNhap) 
+            FROM tt_chitiet_nxkho ctnx
+            JOIN tt_sanpham sp ON ctnx.maSanPham = sp.maSanPham
+            WHERE ctnx.NhapXuat = 1";
+                MySqlCommand cmdNhap = new MySqlCommand(queryNhap, conn);
+                decimal tongTienNhap = Convert.ToDecimal(cmdNhap.ExecuteScalar() ?? 0);
+                lbltongtiennhap.Text = "Tổng tiền nhập: " + tongTienNhap.ToString("N0") + " VNĐ";
+
+                // Lợi nhuận
+                decimal loiNhuan = tongDoanhThu - tongTienNhap;
+                lblloinhuan.Text = "Lợi nhuận: " + loiNhuan.ToString("N0") + " VNĐ";
             }
+        }
 
-            // Gán dữ liệu vào ReportViewer
-            ReportDataSource rds = new ReportDataSource("DS_HoaDon", dt);
-            reportViewer.LocalReport.ReportPath = "ReportHoaDon.rdlc"; // Tên file báo cáo
-            reportViewer.LocalReport.DataSources.Clear();
-            reportViewer.LocalReport.DataSources.Add(rds);
+        private void LoadReport()
+        {
 
-            reportViewer.RefreshReport();
+        }
+        
+        private void btnloinhuan_Click(object sender, EventArgs e)
+        {
+            new FormLoiNhuan().ShowDialog();
+
+        }
+
+        private void btnBaocaobanhang_Click(object sender, EventArgs e)
+        {
+            new FormBaoCaoBanHang().ShowDialog();
+
+        }
+
+        private void btnLuongnv_Click(object sender, EventArgs e)
+        {
+            new FormThongKeLuong().ShowDialog();
+        }
+
+        private void btnDoanhthu_Click(object sender, EventArgs e)
+        {
+            new FormDoanhThuBanHang().ShowDialog();
+
+        }
+
+        private void btnnhapxuatkho_Click(object sender, EventArgs e)
+        {
+            new FormNhapXuatKho().ShowDialog();
+
         }
     }
 }

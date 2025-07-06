@@ -28,165 +28,173 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            button2 = new Button();
             label1 = new Label();
-            label2 = new Label();
-            button1 = new Button();
             label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            lbltongspb = new Label();
+            lbltongdoanhthu = new Label();
             label6 = new Label();
-            label7 = new Label();
+            lbltongtiennhap = new Label();
             label8 = new Label();
-            label9 = new Label();
+            lblloinhuan = new Label();
             label10 = new Label();
+            btnBaocaobanhang = new Button();
+            btnLuongnv = new Button();
+            btnDoanhthu = new Button();
+            btnnhapxuatkho = new Button();
+            btnloinhuan = new Button();
             SuspendLayout();
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(113, 68);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 0;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(464, 68);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(250, 27);
-            dateTimePicker2.TabIndex = 2;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(158, 127);
-            button2.Name = "button2";
-            button2.Size = new Size(205, 42);
-            button2.TabIndex = 3;
-            button2.Text = "Thống kê";
-            button2.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.Location = new Point(48, 68);
+            label1.Location = new Point(316, 65);
             label1.Name = "label1";
-            label1.Size = new Size(37, 28);
+            label1.Size = new Size(241, 28);
             label1.TabIndex = 6;
-            label1.Text = "Từ";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label2.Location = new Point(389, 68);
-            label2.Name = "label2";
-            label2.Size = new Size(48, 28);
-            label2.TabIndex = 7;
-            label2.Text = "đến";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(464, 127);
-            button1.Name = "button1";
-            button1.Size = new Size(205, 42);
-            button1.TabIndex = 9;
-            button1.Text = "Xuất PDF";
-            button1.UseVisualStyleBackColor = true;
+            label1.Text = "THỐNG KÊ VÀ BÁO CÁO";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(58, 205);
+            label3.Location = new Point(270, 135);
             label3.Name = "label3";
             label3.Size = new Size(147, 20);
             label3.TabIndex = 10;
             label3.Text = "Tổng sản phẩm bán: ";
             // 
-            // label4
+            // lbltongspb
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(256, 205);
-            label4.Name = "label4";
-            label4.Size = new Size(140, 20);
-            label4.TabIndex = 11;
-            label4.Text = "Tổng sản phẩm bán";
+            lbltongspb.AutoSize = true;
+            lbltongspb.Location = new Point(468, 135);
+            lbltongspb.Name = "lbltongspb";
+            lbltongspb.Size = new Size(140, 20);
+            lbltongspb.TabIndex = 11;
+            lbltongspb.Text = "Tổng sản phẩm bán";
             // 
-            // label5
+            // lbltongdoanhthu
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(256, 250);
-            label5.Name = "label5";
-            label5.Size = new Size(114, 20);
-            label5.TabIndex = 13;
-            label5.Text = "Tổng doanh thu";
+            lbltongdoanhthu.AutoSize = true;
+            lbltongdoanhthu.Location = new Point(468, 180);
+            lbltongdoanhthu.Name = "lbltongdoanhthu";
+            lbltongdoanhthu.Size = new Size(114, 20);
+            lbltongdoanhthu.TabIndex = 13;
+            lbltongdoanhthu.Text = "Tổng doanh thu";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(58, 250);
+            label6.Location = new Point(270, 180);
             label6.Name = "label6";
             label6.Size = new Size(121, 20);
             label6.TabIndex = 12;
             label6.Text = "Tổng doanh thu: ";
             // 
-            // label7
+            // lbltongtiennhap
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(256, 288);
-            label7.Name = "label7";
-            label7.Size = new Size(113, 20);
-            label7.TabIndex = 15;
-            label7.Text = "Tổng tiền nhập ";
+            lbltongtiennhap.AutoSize = true;
+            lbltongtiennhap.Location = new Point(468, 218);
+            lbltongtiennhap.Name = "lbltongtiennhap";
+            lbltongtiennhap.Size = new Size(113, 20);
+            lbltongtiennhap.TabIndex = 15;
+            lbltongtiennhap.Text = "Tổng tiền nhập ";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(58, 288);
+            label8.Location = new Point(270, 218);
             label8.Name = "label8";
             label8.Size = new Size(116, 20);
             label8.TabIndex = 14;
             label8.Text = "Tổng tiền nhập: ";
             // 
-            // label9
+            // lblloinhuan
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(256, 327);
-            label9.Name = "label9";
-            label9.Size = new Size(73, 20);
-            label9.TabIndex = 17;
-            label9.Text = "Lợi nhuận";
+            lblloinhuan.AutoSize = true;
+            lblloinhuan.Location = new Point(468, 257);
+            lblloinhuan.Name = "lblloinhuan";
+            lblloinhuan.Size = new Size(73, 20);
+            lblloinhuan.TabIndex = 17;
+            lblloinhuan.Text = "Lợi nhuận";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(58, 327);
+            label10.Location = new Point(270, 257);
             label10.Name = "label10";
             label10.Size = new Size(77, 20);
             label10.TabIndex = 16;
             label10.Text = "Lợi nhuận ";
+            // 
+            // btnBaocaobanhang
+            // 
+            btnBaocaobanhang.Location = new Point(271, 369);
+            btnBaocaobanhang.Name = "btnBaocaobanhang";
+            btnBaocaobanhang.Size = new Size(338, 48);
+            btnBaocaobanhang.TabIndex = 18;
+            btnBaocaobanhang.Text = "Báo cáo bán hàng";
+            btnBaocaobanhang.UseVisualStyleBackColor = true;
+            btnBaocaobanhang.Click += btnBaocaobanhang_Click;
+            // 
+            // btnLuongnv
+            // 
+            btnLuongnv.Location = new Point(271, 327);
+            btnLuongnv.Name = "btnLuongnv";
+            btnLuongnv.Size = new Size(338, 48);
+            btnLuongnv.TabIndex = 19;
+            btnLuongnv.Text = "Lương nhân viên";
+            btnLuongnv.UseVisualStyleBackColor = true;
+            btnLuongnv.Click += btnLuongnv_Click;
+            // 
+            // btnDoanhthu
+            // 
+            btnDoanhthu.Location = new Point(271, 412);
+            btnDoanhthu.Name = "btnDoanhthu";
+            btnDoanhthu.Size = new Size(338, 48);
+            btnDoanhthu.TabIndex = 21;
+            btnDoanhthu.Text = "Doanh thu";
+            btnDoanhthu.UseVisualStyleBackColor = true;
+            btnDoanhthu.Click += btnDoanhthu_Click;
+            // 
+            // btnnhapxuatkho
+            // 
+            btnnhapxuatkho.Location = new Point(271, 457);
+            btnnhapxuatkho.Name = "btnnhapxuatkho";
+            btnnhapxuatkho.Size = new Size(338, 48);
+            btnnhapxuatkho.TabIndex = 20;
+            btnnhapxuatkho.Text = "Nhập / Xuất kho";
+            btnnhapxuatkho.UseVisualStyleBackColor = true;
+            btnnhapxuatkho.Click += btnnhapxuatkho_Click;
+            // 
+            // btnloinhuan
+            // 
+            btnloinhuan.Location = new Point(271, 501);
+            btnloinhuan.Name = "btnloinhuan";
+            btnloinhuan.Size = new Size(338, 48);
+            btnloinhuan.TabIndex = 23;
+            btnloinhuan.Text = "Lợi nhuận";
+            btnloinhuan.UseVisualStyleBackColor = true;
+            btnloinhuan.Click += btnloinhuan_Click;
             // 
             // FormThongKe
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(818, 575);
-            Controls.Add(label9);
+            Controls.Add(btnloinhuan);
+            Controls.Add(btnDoanhthu);
+            Controls.Add(btnnhapxuatkho);
+            Controls.Add(btnLuongnv);
+            Controls.Add(btnBaocaobanhang);
+            Controls.Add(lblloinhuan);
             Controls.Add(label10);
-            Controls.Add(label7);
+            Controls.Add(lbltongtiennhap);
             Controls.Add(label8);
-            Controls.Add(label5);
+            Controls.Add(lbltongdoanhthu);
             Controls.Add(label6);
-            Controls.Add(label4);
+            Controls.Add(lbltongspb);
             Controls.Add(label3);
-            Controls.Add(button1);
-            Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button2);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
             Name = "FormThongKe";
             Text = "FormThongKe";
             Load += FormThongKe_Load;
@@ -195,20 +203,19 @@
         }
 
         #endregion
-
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
-        private Button button2;
         private Label label1;
-        private Label label2;
-        private Button button1;
         private Label label3;
-        private Label label4;
-        private Label label5;
+        private Label lbltongspb;
+        private Label lbltongdoanhthu;
         private Label label6;
-        private Label label7;
+        private Label lbltongtiennhap;
         private Label label8;
-        private Label label9;
+        private Label lblloinhuan;
         private Label label10;
+        private Button btnBaocaobanhang;
+        private Button btnLuongnv;
+        private Button btnDoanhthu;
+        private Button btnnhapxuatkho;
+        private Button btnloinhuan;
     }
 }
