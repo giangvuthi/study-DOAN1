@@ -57,6 +57,13 @@ namespace DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dgvDoanhThu.DataSource = dt;
+                DataGridViewHelper.FormatDataGridView(
+        dgvDoanhThu,
+        rightAlignColumns: new[] { "tongDoanhThu" },
+        dateColumns: new[] { "ngayLap" },
+        currencyColumns: new[] { "tongDoanhThu" },
+        centerAll: false // hoặc true nếu bạn muốn tất cả căn giữa
+    );
 
                 // Tính tổng doanh thu
                 decimal tongTien = 0;
@@ -81,8 +88,9 @@ namespace DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo
 
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
+            e.Graphics.DrawString("BÁO CÁO DOANH THU", new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new PointF(300, 20));
+            e.Graphics.DrawString($"Thời gian: {DateTime.Now.ToString("dd/MM/yyyy HH:mm")}", new Font("Arial", 10), Brushes.Black, new PointF(10, 60));
             e.Graphics.DrawImage(bitmap, 0, 0);
-
         }
 
         private void btnIn_Click(object sender, EventArgs e)

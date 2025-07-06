@@ -55,6 +55,7 @@
             btnHuy = new Button();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             printPreviewDialog1 = new PrintPreviewDialog();
+            label1 = new Label();
             grbThongtinchung.SuspendLayout();
             grbThongTinSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).BeginInit();
@@ -70,7 +71,7 @@
             grbThongtinchung.Controls.Add(dtpNgayTao);
             grbThongtinchung.Controls.Add(cbmakhachhang);
             grbThongtinchung.Controls.Add(txtMaHd);
-            grbThongtinchung.Location = new Point(28, 26);
+            grbThongtinchung.Location = new Point(32, 95);
             grbThongtinchung.Name = "grbThongtinchung";
             grbThongtinchung.Size = new Size(1108, 71);
             grbThongtinchung.TabIndex = 0;
@@ -125,6 +126,7 @@
             txtMaHd.Location = new Point(19, 26);
             txtMaHd.Name = "txtMaHd";
             txtMaHd.PlaceholderText = "Ma hoa don";
+            txtMaHd.ReadOnly = true;
             txtMaHd.Size = new Size(84, 27);
             txtMaHd.TabIndex = 0;
             // 
@@ -146,7 +148,7 @@
             grbThongTinSanPham.Controls.Add(txtDonGia);
             grbThongTinSanPham.Controls.Add(btnThemSanPham);
             grbThongTinSanPham.Controls.Add(cbMasanpham);
-            grbThongTinSanPham.Location = new Point(28, 103);
+            grbThongTinSanPham.Location = new Point(32, 172);
             grbThongTinSanPham.Name = "grbThongTinSanPham";
             grbThongTinSanPham.Size = new Size(1108, 71);
             grbThongTinSanPham.TabIndex = 7;
@@ -158,6 +160,7 @@
             txtTonKho.Location = new Point(475, 28);
             txtTonKho.Name = "txtTonKho";
             txtTonKho.PlaceholderText = "Tồn kho";
+            txtTonKho.ReadOnly = true;
             txtTonKho.Size = new Size(115, 27);
             txtTonKho.TabIndex = 8;
             // 
@@ -174,6 +177,7 @@
             txtTenSanpham.Location = new Point(138, 28);
             txtTenSanpham.Name = "txtTenSanpham";
             txtTenSanpham.PlaceholderText = "Ten san pham";
+            txtTenSanpham.ReadOnly = true;
             txtTenSanpham.Size = new Size(144, 27);
             txtTenSanpham.TabIndex = 6;
             // 
@@ -182,6 +186,7 @@
             txtDonGia.Location = new Point(316, 25);
             txtDonGia.Name = "txtDonGia";
             txtDonGia.PlaceholderText = "Don gia";
+            txtDonGia.ReadOnly = true;
             txtDonGia.Size = new Size(116, 27);
             txtDonGia.TabIndex = 0;
             // 
@@ -197,7 +202,7 @@
             // dgvThongTinSanPham
             // 
             dgvThongTinSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvThongTinSanPham.Location = new Point(28, 195);
+            dgvThongTinSanPham.Location = new Point(32, 264);
             dgvThongTinSanPham.Name = "dgvThongTinSanPham";
             dgvThongTinSanPham.RowHeadersWidth = 51;
             dgvThongTinSanPham.Size = new Size(1108, 209);
@@ -208,7 +213,7 @@
             // 
             // btnTaoHoaDon
             // 
-            btnTaoHoaDon.Location = new Point(231, 436);
+            btnTaoHoaDon.Location = new Point(235, 505);
             btnTaoHoaDon.Name = "btnTaoHoaDon";
             btnTaoHoaDon.Size = new Size(263, 43);
             btnTaoHoaDon.TabIndex = 9;
@@ -218,11 +223,11 @@
             // 
             // btnXoaSanPham
             // 
-            btnXoaSanPham.Location = new Point(1005, 271);
+            btnXoaSanPham.Location = new Point(540, 504);
             btnXoaSanPham.Name = "btnXoaSanPham";
-            btnXoaSanPham.Size = new Size(109, 44);
+            btnXoaSanPham.Size = new Size(139, 44);
             btnXoaSanPham.TabIndex = 10;
-            btnXoaSanPham.Text = "Xóa";
+            btnXoaSanPham.Text = "Xóa sản phẩm";
             btnXoaSanPham.UseVisualStyleBackColor = true;
             btnXoaSanPham.Click += btnXoaSanPham_Click;
             // 
@@ -232,7 +237,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { tsLichsubanhang, toolStripSeparator1, tsDoanhthu, toolStripSeparator2, tsLammoi });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1148, 27);
+            toolStrip1.Size = new Size(1187, 27);
             toolStrip1.TabIndex = 11;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -275,7 +280,7 @@
             // 
             // btnHuy
             // 
-            btnHuy.Location = new Point(715, 436);
+            btnHuy.Location = new Point(719, 505);
             btnHuy.Name = "btnHuy";
             btnHuy.Size = new Size(263, 43);
             btnHuy.TabIndex = 12;
@@ -297,11 +302,22 @@
             printPreviewDialog1.Name = "printPreviewDialog1";
             printPreviewDialog1.Visible = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(505, 57);
+            label1.Name = "label1";
+            label1.Size = new Size(109, 28);
+            label1.TabIndex = 7;
+            label1.Text = "HÓA ĐƠN";
+            // 
             // FormBanhang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1148, 504);
+            ClientSize = new Size(1187, 596);
+            Controls.Add(label1);
             Controls.Add(btnHuy);
             Controls.Add(toolStrip1);
             Controls.Add(btnXoaSanPham);
@@ -352,5 +368,6 @@
         private Button btnHuy;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PrintPreviewDialog printPreviewDialog1;
+        private Label label1;
     }
 }

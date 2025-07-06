@@ -37,7 +37,10 @@
             label3 = new Label();
             label4 = new Label();
             lblTongLuong = new Label();
-            btnQuayLai = new Button();
+            btnIn = new Button();
+            btnTaiLai = new Button();
+            button1 = new Button();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)dgvLuongNV).BeginInit();
             SuspendLayout();
             // 
@@ -45,7 +48,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(505, 32);
+            label1.Location = new Point(504, 21);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(230, 31);
@@ -55,7 +58,7 @@
             // dgvLuongNV
             // 
             dgvLuongNV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLuongNV.Location = new Point(108, 194);
+            dgvLuongNV.Location = new Point(124, 208);
             dgvLuongNV.Margin = new Padding(4, 3, 4, 3);
             dgvLuongNV.Name = "dgvLuongNV";
             dgvLuongNV.RowHeadersWidth = 51;
@@ -65,7 +68,7 @@
             // cbThang
             // 
             cbThang.FormattingEnabled = true;
-            cbThang.Location = new Point(234, 121);
+            cbThang.Location = new Point(250, 98);
             cbThang.Margin = new Padding(4, 3, 4, 3);
             cbThang.Name = "cbThang";
             cbThang.Size = new Size(188, 31);
@@ -73,10 +76,10 @@
             // 
             // btnLoc
             // 
-            btnLoc.Location = new Point(901, 120);
+            btnLoc.Location = new Point(540, 126);
             btnLoc.Margin = new Padding(4, 3, 4, 3);
             btnLoc.Name = "btnLoc";
-            btnLoc.Size = new Size(118, 33);
+            btnLoc.Size = new Size(118, 40);
             btnLoc.TabIndex = 3;
             btnLoc.Text = "Thống kê";
             btnLoc.UseVisualStyleBackColor = true;
@@ -85,7 +88,7 @@
             // cbNam
             // 
             cbNam.FormattingEnabled = true;
-            cbNam.Location = new Point(641, 121);
+            cbNam.Location = new Point(250, 160);
             cbNam.Margin = new Padding(4, 3, 4, 3);
             cbNam.Name = "cbNam";
             cbNam.Size = new Size(188, 31);
@@ -95,7 +98,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            label2.Location = new Point(108, 130);
+            label2.Location = new Point(124, 107);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(70, 23);
@@ -106,7 +109,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            label3.Location = new Point(505, 124);
+            label3.Location = new Point(124, 163);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(51, 23);
@@ -117,7 +120,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            label4.Location = new Point(108, 464);
+            label4.Location = new Point(124, 448);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(114, 23);
@@ -128,28 +131,55 @@
             // 
             lblTongLuong.AutoSize = true;
             lblTongLuong.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            lblTongLuong.Location = new Point(234, 464);
+            lblTongLuong.Location = new Point(250, 448);
             lblTongLuong.Margin = new Padding(4, 0, 4, 0);
             lblTongLuong.Name = "lblTongLuong";
             lblTongLuong.Size = new Size(120, 23);
             lblTongLuong.TabIndex = 8;
             lblTongLuong.Text = "lblTongLuong";
             // 
-            // btnQuayLai
+            // btnIn
             // 
-            btnQuayLai.Location = new Point(925, 474);
-            btnQuayLai.Name = "btnQuayLai";
-            btnQuayLai.Size = new Size(94, 29);
-            btnQuayLai.TabIndex = 13;
-            btnQuayLai.Text = "Quay lại";
-            btnQuayLai.UseVisualStyleBackColor = true;
+            btnIn.Location = new Point(693, 126);
+            btnIn.Name = "btnIn";
+            btnIn.Size = new Size(94, 40);
+            btnIn.TabIndex = 43;
+            btnIn.Text = "In";
+            btnIn.UseVisualStyleBackColor = true;
+            btnIn.Click += btnIn_Click;
+            // 
+            // btnTaiLai
+            // 
+            btnTaiLai.Location = new Point(818, 126);
+            btnTaiLai.Name = "btnTaiLai";
+            btnTaiLai.Size = new Size(94, 40);
+            btnTaiLai.TabIndex = 42;
+            btnTaiLai.Text = "Tải lại";
+            btnTaiLai.UseVisualStyleBackColor = true;
+            btnTaiLai.Click += btnTaiLai_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(941, 126);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 40);
+            button1.TabIndex = 41;
+            button1.Text = "Quay lại";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
             // 
             // FormThongKeLuong
             // 
             AutoScaleDimensions = new SizeF(10F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1186, 566);
-            Controls.Add(btnQuayLai);
+            ClientSize = new Size(1173, 536);
+            Controls.Add(btnIn);
+            Controls.Add(btnTaiLai);
+            Controls.Add(button1);
             Controls.Add(lblTongLuong);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -180,6 +210,9 @@
         private Label label3;
         private Label label4;
         private Label lblTongLuong;
-        private Button btnQuayLai;
+        private Button btnIn;
+        private Button btnTaiLai;
+        private Button button1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

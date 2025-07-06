@@ -50,7 +50,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(273, 33);
+            label1.Location = new Point(430, 38);
             label1.Name = "label1";
             label1.Size = new Size(250, 31);
             label1.TabIndex = 0;
@@ -59,17 +59,17 @@
             // dgvBanHang
             // 
             dgvBanHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBanHang.Location = new Point(28, 219);
+            dgvBanHang.Location = new Point(122, 215);
             dgvBanHang.Name = "dgvBanHang";
             dgvBanHang.RowHeadersWidth = 51;
-            dgvBanHang.Size = new Size(750, 239);
+            dgvBanHang.Size = new Size(877, 239);
             dgvBanHang.TabIndex = 1;
             // 
             // btnTaiLai
             // 
-            btnTaiLai.Location = new Point(457, 149);
+            btnTaiLai.Location = new Point(634, 140);
             btnTaiLai.Name = "btnTaiLai";
-            btnTaiLai.Size = new Size(94, 36);
+            btnTaiLai.Size = new Size(90, 38);
             btnTaiLai.TabIndex = 2;
             btnTaiLai.Text = "Tải lại";
             btnTaiLai.UseVisualStyleBackColor = true;
@@ -77,9 +77,9 @@
             // 
             // btnQuayLai
             // 
-            btnQuayLai.Location = new Point(579, 149);
+            btnQuayLai.Location = new Point(756, 140);
             btnQuayLai.Name = "btnQuayLai";
-            btnQuayLai.Size = new Size(94, 36);
+            btnQuayLai.Size = new Size(90, 38);
             btnQuayLai.TabIndex = 13;
             btnQuayLai.Text = "Quay lại";
             btnQuayLai.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.Location = new Point(28, 483);
+            label2.Location = new Point(122, 479);
             label2.Name = "label2";
             label2.Size = new Size(110, 20);
             label2.TabIndex = 14;
@@ -98,7 +98,7 @@
             // lblTongSoLuong
             // 
             lblTongSoLuong.AutoSize = true;
-            lblTongSoLuong.Location = new Point(160, 483);
+            lblTongSoLuong.Location = new Point(254, 479);
             lblTongSoLuong.Name = "lblTongSoLuong";
             lblTongSoLuong.Size = new Size(117, 20);
             lblTongSoLuong.TabIndex = 15;
@@ -107,7 +107,7 @@
             // lblTongTien
             // 
             lblTongTien.AutoSize = true;
-            lblTongTien.Location = new Point(160, 523);
+            lblTongTien.Location = new Point(853, 488);
             lblTongTien.Name = "lblTongTien";
             lblTongTien.Size = new Size(87, 20);
             lblTongTien.TabIndex = 17;
@@ -117,7 +117,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.Location = new Point(28, 523);
+            label4.Location = new Point(732, 488);
             label4.Name = "label4";
             label4.Size = new Size(76, 20);
             label4.TabIndex = 16;
@@ -129,9 +129,9 @@
             // 
             // btnIn
             // 
-            btnIn.Location = new Point(579, 101);
+            btnIn.Location = new Point(756, 92);
             btnIn.Name = "btnIn";
-            btnIn.Size = new Size(94, 36);
+            btnIn.Size = new Size(90, 38);
             btnIn.TabIndex = 18;
             btnIn.Text = "In";
             btnIn.UseVisualStyleBackColor = true;
@@ -139,23 +139,23 @@
             // 
             // dtpTuNgay
             // 
-            dtpTuNgay.Location = new Point(82, 112);
+            dtpTuNgay.Location = new Point(330, 98);
             dtpTuNgay.Name = "dtpTuNgay";
-            dtpTuNgay.Size = new Size(250, 27);
+            dtpTuNgay.Size = new Size(246, 27);
             dtpTuNgay.TabIndex = 19;
             // 
             // dtpDenNgay
             // 
-            dtpDenNgay.Location = new Point(82, 158);
+            dtpDenNgay.Location = new Point(330, 144);
             dtpDenNgay.Name = "dtpDenNgay";
-            dtpDenNgay.Size = new Size(250, 27);
+            dtpDenNgay.Size = new Size(246, 27);
             dtpDenNgay.TabIndex = 20;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(29, 119);
+            label3.Location = new Point(277, 105);
             label3.Name = "label3";
             label3.Size = new Size(28, 20);
             label3.TabIndex = 21;
@@ -165,7 +165,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.Location = new Point(29, 163);
+            label5.Location = new Point(277, 149);
             label5.Name = "label5";
             label5.Size = new Size(35, 20);
             label5.TabIndex = 22;
@@ -173,9 +173,9 @@
             // 
             // btnThongKe
             // 
-            btnThongKe.Location = new Point(457, 101);
+            btnThongKe.Location = new Point(634, 92);
             btnThongKe.Name = "btnThongKe";
-            btnThongKe.Size = new Size(94, 36);
+            btnThongKe.Size = new Size(90, 38);
             btnThongKe.TabIndex = 23;
             btnThongKe.Text = "Thống kê";
             btnThongKe.UseVisualStyleBackColor = true;

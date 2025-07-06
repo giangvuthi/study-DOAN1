@@ -30,43 +30,54 @@
         {
             btnQuayLai = new Button();
             label4 = new Label();
-            lblTongSoLuong = new Label();
+            lblTongSoLuongNhap = new Label();
             label3 = new Label();
             label2 = new Label();
             btnLocDuLieu = new Button();
             dgvNhapXuat = new DataGridView();
             label1 = new Label();
             cbLoaiNX = new ComboBox();
+            btnIn = new Button();
+            btnTaiLai = new Button();
+            dtpDen = new DateTimePicker();
+            label5 = new Label();
+            dtpTu = new DateTimePicker();
+            label6 = new Label();
+            label7 = new Label();
+            lblTongSoLuongXuat = new Label();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            cbSanpham = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvNhapXuat).BeginInit();
             SuspendLayout();
             // 
             // btnQuayLai
             // 
-            btnQuayLai.Location = new Point(527, 145);
+            btnQuayLai.Location = new Point(655, 232);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.Size = new Size(94, 40);
             btnQuayLai.TabIndex = 22;
             btnQuayLai.Text = "Quay lại";
             btnQuayLai.UseVisualStyleBackColor = true;
+            btnQuayLai.Click += btnQuayLai_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            label4.Location = new Point(48, 482);
+            label4.Location = new Point(49, 558);
             label4.Name = "label4";
-            label4.Size = new Size(136, 23);
+            label4.Size = new Size(181, 23);
             label4.TabIndex = 21;
-            label4.Text = "Tổng số lượng: ";
+            label4.Text = "Tổng số lượng nhap: ";
             // 
-            // lblTongSoLuong
+            // lblTongSoLuongNhap
             // 
-            lblTongSoLuong.AutoSize = true;
-            lblTongSoLuong.Location = new Point(214, 482);
-            lblTongSoLuong.Name = "lblTongSoLuong";
-            lblTongSoLuong.Size = new Size(117, 20);
-            lblTongSoLuong.TabIndex = 19;
-            lblTongSoLuong.Text = "lblTongSoLuong";
+            lblTongSoLuongNhap.AutoSize = true;
+            lblTongSoLuongNhap.Location = new Point(242, 561);
+            lblTongSoLuongNhap.Name = "lblTongSoLuongNhap";
+            lblTongSoLuongNhap.Size = new Size(153, 20);
+            lblTongSoLuongNhap.TabIndex = 19;
+            lblTongSoLuongNhap.Text = "lblTongSoLuongNhap";
             // 
             // label3
             // 
@@ -90,17 +101,18 @@
             // 
             // btnLocDuLieu
             // 
-            btnLocDuLieu.Location = new Point(402, 145);
+            btnLocDuLieu.Location = new Point(282, 232);
             btnLocDuLieu.Name = "btnLocDuLieu";
             btnLocDuLieu.Size = new Size(94, 40);
             btnLocDuLieu.TabIndex = 15;
             btnLocDuLieu.Text = "Lọc dữ liệu";
             btnLocDuLieu.UseVisualStyleBackColor = true;
+            btnLocDuLieu.Click += btnLocDuLieu_Click;
             // 
             // dgvNhapXuat
             // 
             dgvNhapXuat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvNhapXuat.Location = new Point(46, 216);
+            dgvNhapXuat.Location = new Point(47, 292);
             dgvNhapXuat.Name = "dgvNhapXuat";
             dgvNhapXuat.RowHeadersWidth = 51;
             dgvNhapXuat.Size = new Size(920, 239);
@@ -110,7 +122,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(402, 33);
+            label1.Location = new Point(407, 25);
             label1.Name = "label1";
             label1.Size = new Size(219, 31);
             label1.TabIndex = 13;
@@ -119,21 +131,118 @@
             // cbLoaiNX
             // 
             cbLoaiNX.FormattingEnabled = true;
-            cbLoaiNX.Location = new Point(440, 97);
+            cbLoaiNX.Location = new Point(407, 179);
             cbLoaiNX.Name = "cbLoaiNX";
-            cbLoaiNX.Size = new Size(151, 28);
+            cbLoaiNX.Size = new Size(105, 28);
             cbLoaiNX.TabIndex = 23;
             cbLoaiNX.Text = "Loại";
+            cbLoaiNX.SelectedIndexChanged += cbLoaiNX_SelectedIndexChanged;
+            // 
+            // btnIn
+            // 
+            btnIn.Location = new Point(407, 232);
+            btnIn.Name = "btnIn";
+            btnIn.Size = new Size(94, 40);
+            btnIn.TabIndex = 40;
+            btnIn.Text = "In";
+            btnIn.UseVisualStyleBackColor = true;
+            btnIn.Click += btnIn_Click;
+            // 
+            // btnTaiLai
+            // 
+            btnTaiLai.Location = new Point(532, 232);
+            btnTaiLai.Name = "btnTaiLai";
+            btnTaiLai.Size = new Size(94, 40);
+            btnTaiLai.TabIndex = 39;
+            btnTaiLai.Text = "Tải lại";
+            btnTaiLai.UseVisualStyleBackColor = true;
+            btnTaiLai.Click += btnTaiLai_Click;
+            // 
+            // dtpDen
+            // 
+            dtpDen.Location = new Point(407, 130);
+            dtpDen.Name = "dtpDen";
+            dtpDen.Size = new Size(250, 27);
+            dtpDen.TabIndex = 44;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            label5.Location = new Point(328, 137);
+            label5.Name = "label5";
+            label5.Size = new Size(42, 23);
+            label5.TabIndex = 43;
+            label5.Text = "Đến";
+            // 
+            // dtpTu
+            // 
+            dtpTu.Location = new Point(407, 78);
+            dtpTu.Name = "dtpTu";
+            dtpTu.Size = new Size(250, 27);
+            dtpTu.TabIndex = 42;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            label6.Location = new Point(328, 83);
+            label6.Name = "label6";
+            label6.Size = new Size(31, 23);
+            label6.TabIndex = 41;
+            label6.Text = "Từ";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            label7.Location = new Point(426, 555);
+            label7.Name = "label7";
+            label7.Size = new Size(176, 23);
+            label7.TabIndex = 46;
+            label7.Text = "Tổng số lượng xuat: ";
+            // 
+            // lblTongSoLuongXuat
+            // 
+            lblTongSoLuongXuat.AutoSize = true;
+            lblTongSoLuongXuat.Location = new Point(643, 558);
+            lblTongSoLuongXuat.Name = "lblTongSoLuongXuat";
+            lblTongSoLuongXuat.Size = new Size(147, 20);
+            lblTongSoLuongXuat.TabIndex = 45;
+            lblTongSoLuongXuat.Text = "lblTongSoLuongXuat";
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // cbSanpham
+            // 
+            cbSanpham.FormattingEnabled = true;
+            cbSanpham.Location = new Point(552, 179);
+            cbSanpham.Name = "cbSanpham";
+            cbSanpham.Size = new Size(105, 28);
+            cbSanpham.TabIndex = 47;
+            cbSanpham.Text = "Sản phẩm";
+            cbSanpham.SelectedIndexChanged += cbSanpham_SelectedIndexChanged;
             // 
             // FormNhapXuatKho
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1001, 603);
+            Controls.Add(cbSanpham);
+            Controls.Add(label7);
+            Controls.Add(lblTongSoLuongXuat);
+            Controls.Add(dtpDen);
+            Controls.Add(label5);
+            Controls.Add(dtpTu);
+            Controls.Add(label6);
+            Controls.Add(btnIn);
+            Controls.Add(btnTaiLai);
             Controls.Add(cbLoaiNX);
             Controls.Add(btnQuayLai);
             Controls.Add(label4);
-            Controls.Add(lblTongSoLuong);
+            Controls.Add(lblTongSoLuongNhap);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(btnLocDuLieu);
@@ -141,6 +250,7 @@
             Controls.Add(label1);
             Name = "FormNhapXuatKho";
             Text = "FormNhapXuatKho";
+            Load += FormNhapXuatKho_Load;
             ((System.ComponentModel.ISupportInitialize)dgvNhapXuat).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -150,12 +260,22 @@
 
         private Button btnQuayLai;
         private Label label4;
-        private Label lblTongSoLuong;
+        private Label lblTongSoLuongNhap;
         private Label label3;
         private Label label2;
         private Button btnLocDuLieu;
         private DataGridView dgvNhapXuat;
         private Label label1;
         private ComboBox cbLoaiNX;
+        private Button btnIn;
+        private Button btnTaiLai;
+        private DateTimePicker dtpDen;
+        private Label label5;
+        private DateTimePicker dtpTu;
+        private Label label6;
+        private Label label7;
+        private Label lblTongSoLuongXuat;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private ComboBox cbSanpham;
     }
 }

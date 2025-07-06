@@ -1,6 +1,6 @@
 ﻿namespace DOAN1
 {
-    partial class FormDoanhThu
+    partial class FormDoanhThuBanHang
     {
         /// <summary>
         /// Required designer variable.

@@ -57,7 +57,14 @@ namespace DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-                dgvBanHang.DataSource = dt;
+                dgvBanHang.DataSource = dt; 
+                DataGridViewHelper.FormatDataGridView(
+    dgvBanHang,
+    rightAlignColumns: new[] { "tongSoLuong", "tongTien" },
+    dateColumns: null,
+    currencyColumns: new[] { "tongTien" },
+    centerAll: false
+);
 
                 // Tính tổng
                 int tongSoLuong = 0;
@@ -101,7 +108,10 @@ namespace DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo
 
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
+            e.Graphics.DrawString("BÁO CÁO BÁN HÀNG", new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new PointF(300, 20));
+            e.Graphics.DrawString($"Thời gian: {DateTime.Now.ToString("dd/MM/yyyy HH:mm")}", new Font("Arial", 10), Brushes.Black, new PointF(10, 60));
             e.Graphics.DrawImage(bitmap, 0, 0);
+
         }
 
         private void btnTaiLai_Click(object sender, EventArgs e)

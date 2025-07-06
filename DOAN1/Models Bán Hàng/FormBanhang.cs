@@ -67,7 +67,7 @@ namespace DOAN1
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT maNhanVien FROM nhanvien";
+                string query = "SELECT maNhanVien FROM tt_nhanvien";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -111,35 +111,28 @@ namespace DOAN1
         }
         private string TaoMaHoaDonTuDong()
         {
-            string maMoi = "HD001";
+            string maHD = "HD001";
 
-            try
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string query = "SELECT maHoaDon FROM hoadon ORDER BY maHoaDon DESC LIMIT 1";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    object result = cmd.ExecuteScalar();
+                conn.Open();
+                string query = "SELECT maHoaDon FROM hoadon ORDER BY maHoaDon DESC LIMIT 1";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                object result = cmd.ExecuteScalar();
 
-                    if (result != null)
-                    {
-                        string maCu = result.ToString(); // Ví dụ: "HD012"
-                        if (maCu.Length >= 3 && int.TryParse(maCu.Substring(2), out int so))
-                        {
-                            so++;
-                            maMoi = "HD" + so.ToString("D3"); // format 3 chữ số
-                        }
-                    }
+                if (result != null)
+                {
+                    string lastMaHD = result.ToString(); // ví dụ "HD019"
+                    int number = int.Parse(lastMaHD.Substring(2)); // lấy 019 → 19
+                    number++; // tăng lên 20
+                    maHD = "HD" + number.ToString("D3"); // → HD020
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tạo mã hóa đơn tự động: " + ex.Message);
-            }
 
-            return maMoi;
+            return maHD;
         }
+
+
 
         private void btnThemKhachHang_Click(object sender, EventArgs e)
         {
@@ -174,6 +167,8 @@ namespace DOAN1
             dgvThongTinSanPham.Columns["DonGia"].ReadOnly = true;
             dgvThongTinSanPham.Columns["ThanhTien"].ReadOnly = true;
             dgvThongTinSanPham.Columns["SoLuong"].ReadOnly = false;
+            DataGridViewHelper.FormatDataGridView(dgvThongTinSanPham, currencyColumns: new[] { "DonGia", "ThanhTien" });
+
         }
 
 
@@ -245,6 +240,7 @@ namespace DOAN1
             decimal tongThanhTien = 0;
             foreach (DataGridViewRow row in dgvThongTinSanPham.Rows)
             {
+                if (row.IsNewRow) continue;
                 if (row.Cells["ThanhTien"].Value != null)
                 {
                     tongThanhTien += Convert.ToDecimal(row.Cells["ThanhTien"].Value);
@@ -273,12 +269,25 @@ namespace DOAN1
                     // 2. Thêm từng dòng sản phẩm vào chi tiết hóa đơn và trừ tồn kho
                     foreach (DataGridViewRow row in dgvThongTinSanPham.Rows)
                     {
-                        string maSP = row.Cells["MaSP"].Value.ToString();
-                        int soLuong = Convert.ToInt32(row.Cells["SoLuong"].Value);
-                        decimal donGia = Convert.ToDecimal(row.Cells["DonGia"].Value);
-                        decimal thanhTien = Convert.ToDecimal(row.Cells["ThanhTien"].Value);
+                        if (row.IsNewRow) continue;
 
-                        // 0. Kiểm tra tồn kho
+                        var cellMaSP = row.Cells["MaSP"].Value;
+                        var cellSoLuong = row.Cells["SoLuong"].Value;
+                        var cellDonGia = row.Cells["DonGia"].Value;
+                        var cellThanhTien = row.Cells["ThanhTien"].Value;
+
+                        if (cellMaSP == null || string.IsNullOrWhiteSpace(cellMaSP.ToString())
+                            || cellSoLuong == null || string.IsNullOrWhiteSpace(cellSoLuong.ToString())
+                            || cellDonGia == null || string.IsNullOrWhiteSpace(cellDonGia.ToString())
+                            || cellThanhTien == null || string.IsNullOrWhiteSpace(cellThanhTien.ToString()))
+                            continue;
+
+                        string maSP = cellMaSP.ToString();
+                        int soLuong = Convert.ToInt32(cellSoLuong);
+                        decimal donGia = Convert.ToDecimal(cellDonGia);
+                        decimal thanhTien = Convert.ToDecimal(cellThanhTien);
+
+                        // Kiểm tra tồn kho
                         string sqlCheckTonKho = "SELECT soLuongTon FROM tt_sanpham WHERE maSanPham = @maSP";
                         MySqlCommand cmdCheck = new MySqlCommand(sqlCheckTonKho, conn, tran);
                         cmdCheck.Parameters.AddWithValue("@maSP", maSP);
@@ -289,10 +298,10 @@ namespace DOAN1
                             throw new Exception($"Sản phẩm {maSP} không đủ tồn kho. Còn lại: {soLuongTon}, cần: {soLuong}");
                         }
 
-                        // 1. Thêm chi tiết hóa đơn
+                        // Thêm chi tiết hóa đơn
                         string sqlCT = @"INSERT INTO tt_chitiet_hoadon 
-        (maHoaDon, maSanPham, soLuong, donGiaBan, thanhTien) 
-        VALUES (@maHD, @maSP, @soLuong, @donGia, @thanhTien)";
+                    (maHoaDon, maSanPham, soLuong, donGiaBan, thanhTien) 
+                    VALUES (@maHD, @maSP, @soLuong, @donGia, @thanhTien)";
                         MySqlCommand cmdCT = new MySqlCommand(sqlCT, conn, tran);
                         cmdCT.Parameters.AddWithValue("@maHD", maHD);
                         cmdCT.Parameters.AddWithValue("@maSP", maSP);
@@ -301,9 +310,9 @@ namespace DOAN1
                         cmdCT.Parameters.AddWithValue("@thanhTien", thanhTien);
                         cmdCT.ExecuteNonQuery();
 
-                        // 2. Ghi vào bảng lịch sử
+                        // Ghi lịch sử
                         string sqlLS = @"INSERT INTO lichsu (maSanPham, soLuong, Loai, thoiGian, maHoaDon)
-        VALUES (@maSP, @soLuong, @loai, @thoigian, @maHD)";
+                                 VALUES (@maSP, @soLuong, @loai, @thoigian, @maHD)";
                         MySqlCommand cmdLS = new MySqlCommand(sqlLS, conn, tran);
                         cmdLS.Parameters.AddWithValue("@maSP", maSP);
                         cmdLS.Parameters.AddWithValue("@soLuong", soLuong);
@@ -312,18 +321,18 @@ namespace DOAN1
                         cmdLS.Parameters.AddWithValue("@maHD", maHD);
                         cmdLS.ExecuteNonQuery();
 
-                        // 3. Trừ tồn kho
+                        // Trừ tồn kho
                         string sqlUpdate = @"UPDATE tt_sanpham 
-                         SET soLuongTon = soLuongTon - @soLuong 
-                         WHERE maSanPham = @maSP";
+                                     SET soLuongTon = soLuongTon - @soLuong 
+                                     WHERE maSanPham = @maSP";
                         MySqlCommand cmdUpdate = new MySqlCommand(sqlUpdate, conn, tran);
                         cmdUpdate.Parameters.AddWithValue("@soLuong", soLuong);
                         cmdUpdate.Parameters.AddWithValue("@maSP", maSP);
                         cmdUpdate.ExecuteNonQuery();
                     }
 
-
                     tran.Commit();
+
                     if (MessageBox.Show("Bạn có muốn in hóa đơn không?", "In hóa đơn", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         printPreviewDialog1.Document = printDocument1;
@@ -341,7 +350,7 @@ namespace DOAN1
                     {
                         if (conn.State == ConnectionState.Open)
                         {
-                            tran.Rollback(); // chỉ rollback nếu connection còn mở
+                            tran.Rollback();
                         }
                     }
                     catch (Exception rollbackEx)
@@ -351,8 +360,8 @@ namespace DOAN1
 
                     MessageBox.Show("Lỗi khi tạo hóa đơn: " + ex.Message);
                 }
-
             }
+
         }
 
         private void btnXoaSanPham_Click(object sender, EventArgs e)
@@ -409,7 +418,7 @@ namespace DOAN1
 
         private void tsDoanhthu_Click(object sender, EventArgs e)
         {
-            FormDoanhThu f = new FormDoanhThu();
+            FormDoanhThuBanHang f = new FormDoanhThuBanHang();
             f.ShowDialog();
         }
         private void ResetForm(bool reloadDataFromDB)
@@ -464,7 +473,7 @@ namespace DOAN1
             float y = 10;
             float leftMargin = 10;
 
-            g.DrawString("CỬA HÀNG ABC", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, leftMargin, y);
+            g.DrawString("SIÊU THỊ ĐIỆN LẠNH", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, leftMargin, y);
             y += 20;
             g.DrawString($"Mã HĐ: {txtMaHd.Text}", font, Brushes.Black, leftMargin, y); y += 15;
             g.DrawString($"Ngày: {dtpNgayTao.Value:dd/MM/yyyy}", font, Brushes.Black, leftMargin, y); y += 15;

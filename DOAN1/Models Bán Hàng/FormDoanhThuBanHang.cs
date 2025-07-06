@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace DOAN1
 {
-    public partial class FormDoanhThu : Form
+    public partial class FormDoanhThuBanHang : Form
     {
         MySqlConnection conn = new MySqlConnection("server=localhost;user id=root;password=;database=qlbanhang;");
 
-        public FormDoanhThu()
+        public FormDoanhThuBanHang()
         {
             InitializeComponent();
             LoadDoanhThu();
@@ -31,7 +31,7 @@ namespace DOAN1
                     SUM(ct.soLuong * ct.donGiaBan) AS tongTien
                 FROM hoadon hd
                 JOIN tt_chitiet_hoadon ct ON hd.maHoaDon = ct.maHoaDon
-                JOIN nhanvien nv ON hd.maNhanVien = nv.maNhanVien
+                JOIN tt_nhanvien nv ON hd.maNhanVien = nv.maNhanVien
                 GROUP BY hd.maHoaDon, hd.ngayLap, nv.maNhanVien
                 ORDER BY hd.ngayLap DESC";
 
@@ -41,12 +41,21 @@ namespace DOAN1
 
             dgvDoanhthu.DataSource = dt;
 
+            DataGridViewHelper.FormatDataGridView(
+                dgvDoanhthu,
+                rightAlignColumns: new[] { "tongTien" },
+                dateColumns: new[] { "ngayLap" },
+                currencyColumns: new[] { "tongTien" },
+                centerAll: false
+            );
+
             // Tính tổng doanh thu
             decimal tongDoanhThu = 0;
             foreach (DataRow row in dt.Rows)
             {
-                tongDoanhThu += Convert.ToDecimal(row["tongTien"]);
+                tongDoanhThu += row["tongTien"] != DBNull.Value ? Convert.ToDecimal(row["tongTien"]) : 0;
             }
+
 
             lbTongDoanhThu.Text = "Tổng doanh thu: " + tongDoanhThu.ToString("N0") + "₫";
         }
@@ -69,7 +78,7 @@ namespace DOAN1
                     SUM(ct.soLuong * ct.donGiaBan) AS tongTien
                 FROM hoadon hd
                 JOIN tt_chitiet_hoadon ct ON hd.maHoaDon = ct.maHoaDon
-                JOIN nhanvien nv ON hd.maNhanVien = nv.maNhanVien
+                JOIN tt_nhanvien nv ON hd.maNhanVien = nv.maNhanVien
                 WHERE hd.ngayLap BETWEEN @tuNgay AND @denNgay
                   AND nv.maNhanVien = @maNV
                 GROUP BY hd.maHoaDon, hd.ngayLap, nv.maNhanVien
@@ -87,6 +96,13 @@ namespace DOAN1
                 adapter.Fill(dt);
                 dgvDoanhthu.DataSource = dt;
 
+                DataGridViewHelper.FormatDataGridView(
+                    dgvDoanhthu,
+                    rightAlignColumns: new[] { "tongTien" },
+                    dateColumns: new[] { "ngayLap" },
+                    currencyColumns: new[] { "tongTien" },
+                    centerAll: false
+                );
                 // Format cột ngày
                 dgvDoanhthu.Columns["ngayLap"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
@@ -108,7 +124,7 @@ namespace DOAN1
 
         private void LoadMaNhanVien()
         {
-            string query = "SELECT maNhanVien FROM nhanvien";
+            string query = "SELECT maNhanVien FROM tt_nhanvien";
             MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -134,7 +150,7 @@ namespace DOAN1
         SUM(ct.soLuong * ct.donGiaBan) AS tongTien
     FROM hoadon hd
     JOIN tt_chitiet_hoadon ct ON hd.maHoaDon = ct.maHoaDon
-    JOIN nhanvien nv ON hd.maNhanVien = nv.maNhanVien
+    JOIN tt_nhanvien nv ON hd.maNhanVien = nv.maNhanVien
     WHERE hd.ngayLap BETWEEN @tuNgay AND @denNgay
     GROUP BY hd.maHoaDon, hd.ngayLap, nv.maNhanVien
     ORDER BY hd.ngayLap DESC";
@@ -149,6 +165,14 @@ namespace DOAN1
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dgvDoanhthu.DataSource = dt;
+
+                DataGridViewHelper.FormatDataGridView(
+                    dgvDoanhthu,
+                    rightAlignColumns: new[] { "tongTien" },
+                    dateColumns: new[] { "ngayLap" },
+                    currencyColumns: new[] { "tongTien" },
+                    centerAll: false
+                );
 
                 dgvDoanhthu.Columns["ngayLap"].DefaultCellStyle.Format = "dd/MM/yyyy";
 

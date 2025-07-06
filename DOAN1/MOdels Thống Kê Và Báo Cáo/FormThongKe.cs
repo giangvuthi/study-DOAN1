@@ -25,7 +25,7 @@ namespace DOAN1
 
         private void FormThongKe_Load(object sender, EventArgs e)
         {
-
+            LoadThongKeTongQuan();
         }
         private void LoadThongKeTongQuan()
         {
@@ -36,12 +36,12 @@ namespace DOAN1
                 // Tổng sản phẩm đã bán
                 MySqlCommand cmdSPB = new MySqlCommand("SELECT SUM(soLuong) FROM tt_chitiet_hoadon", conn);
                 int tongSPBan = Convert.ToInt32(cmdSPB.ExecuteScalar() ?? 0);
-                lbltongspb.Text = "Tổng sản phẩm bán: " + tongSPBan;
+                lbltongspb.Text = "" + tongSPBan;
 
                 // Tổng doanh thu
-                MySqlCommand cmdDT = new MySqlCommand("SELECT SUM(thanhTien) FROM hoadon", conn);
+                MySqlCommand cmdDT = new MySqlCommand("SELECT SUM(tongThanhTien) FROM hoadon", conn);
                 decimal tongDoanhThu = Convert.ToDecimal(cmdDT.ExecuteScalar() ?? 0);
-                lbltongdoanhthu.Text = "Tổng doanh thu: " + tongDoanhThu.ToString("N0") + " VNĐ";
+                lbltongdoanhthu.Text = "" + tongDoanhThu.ToString("N0") + " VNĐ";
 
                 // Tổng tiền nhập (chỉ nhập - NhapXuat = 1)
                 string queryNhap = @"
@@ -51,11 +51,11 @@ namespace DOAN1
             WHERE ctnx.NhapXuat = 1";
                 MySqlCommand cmdNhap = new MySqlCommand(queryNhap, conn);
                 decimal tongTienNhap = Convert.ToDecimal(cmdNhap.ExecuteScalar() ?? 0);
-                lbltongtiennhap.Text = "Tổng tiền nhập: " + tongTienNhap.ToString("N0") + " VNĐ";
+                lbltongtiennhap.Text = "" + tongTienNhap.ToString("N0") + " VNĐ";
 
                 // Lợi nhuận
                 decimal loiNhuan = tongDoanhThu - tongTienNhap;
-                lblloinhuan.Text = "Lợi nhuận: " + loiNhuan.ToString("N0") + " VNĐ";
+                lblloinhuan.Text = "" + loiNhuan.ToString("N0") + " VNĐ";
             }
         }
 
@@ -83,7 +83,7 @@ namespace DOAN1
 
         private void btnDoanhthu_Click(object sender, EventArgs e)
         {
-            new FormDoanhThuBanHang().ShowDialog();
+            new FormDoanhThu().ShowDialog();
 
         }
 

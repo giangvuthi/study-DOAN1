@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,20 @@ namespace DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo
         public FormThongKeLuong()
         {
             InitializeComponent();
+            InitGridViewColumns(); // 🔧 Bắt buộc phải có
             LoadThangNam();
 
+        }
+        private void InitGridViewColumns()
+        {
+            dgvLuongNV.Columns.Clear();
+
+            dgvLuongNV.Columns.Add("maNV", "Mã nhân viên");
+            dgvLuongNV.Columns.Add("tenNV", "Tên nhân viên");
+            dgvLuongNV.Columns.Add("chucVu", "Chức vụ");
+            dgvLuongNV.Columns.Add("tongCa", "Tổng ca");
+            dgvLuongNV.Columns.Add("luongCa", "Lương/ca");
+            dgvLuongNV.Columns.Add("tongLuong", "Tổng lương");
         }
 
         private void FormThongKeLuong_Load(object sender, EventArgs e)
@@ -86,6 +99,55 @@ namespace DOAN1.MOdels_Thống_Kê_Và_Báo_Cáo
             }
 
             lblTongLuong.Text = $"Tổng lương: {tongLuong:N0} VNĐ";
+            DataGridViewHelper.FormatDataGridView(
+    dgvLuongNV,
+    rightAlignColumns: new[] { "tongCa", "luongCa", "tongLuong" },
+    currencyColumns: new[] { "luongCa", "tongLuong" },
+    centerAll: false
+);
+        }
+
+        private void btnTaiLai_Click(object sender, EventArgs e)
+        {
+            cbThang.SelectedIndex = DateTime.Now.Month - 1;
+            cbNam.SelectedItem = DateTime.Now.Year;
+
+            int thang = DateTime.Now.Month;
+            int nam = DateTime.Now.Year;
+            ThongKeLuong(thang, nam);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        Bitmap bitmap;
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            int height = dgvLuongNV.Height;
+            dgvLuongNV.Height = dgvLuongNV.RowCount * dgvLuongNV.RowTemplate.Height * 2;
+
+            bitmap = new Bitmap(dgvLuongNV.Width, dgvLuongNV.Height);
+            dgvLuongNV.DrawToBitmap(bitmap, new Rectangle(0, 0, dgvLuongNV.Width, dgvLuongNV.Height));
+            dgvLuongNV.Height = height;
+
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+
+            PrintPreviewDialog previewDialog = new PrintPreviewDialog
+            {
+                Document = printDocument
+            };
+
+            previewDialog.ShowDialog();
+        }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString("BÁO CÁO LƯƠNG NHÂN VIÊN", new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new PointF(250, 20));
+            e.Graphics.DrawString($"Thời gian: {DateTime.Now.ToString("dd/MM/yyyy HH:mm")}", new Font("Arial", 10), Brushes.Black, new PointF(10, 60));
+            e.Graphics.DrawImage(bitmap, 0, 0);
         }
     }
 }

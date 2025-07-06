@@ -14,7 +14,7 @@ namespace DOAN1
 {
     public partial class FormLichSu : Form
     {
-        string connectionString = "server=localhost;uid=root;pwd=;database=qlbanhang;";
+        string connectionString = "server=localhost;uid=root;pwd=;database=qlbanhang;Allow Zero Datetime=true;Convert Zero Datetime=true";
 
         public FormLichSu()
         {
@@ -41,37 +41,57 @@ namespace DOAN1
 
         private void LoadLichSu(string keyword = "", string loaiTim = "Tất cả", DateTime? tuNgay = null, DateTime? denNgay = null)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM lichsu WHERE 1=1";
-
-                if (!string.IsNullOrEmpty(keyword) && loaiTim == "Mã hóa đơn")
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
-                    query += " AND maHoaDon LIKE @kw";
+                    conn.Open();
+                    string query = @"
+            SELECT * FROM lichsu
+            WHERE 1=1";
+
+                    if (!string.IsNullOrEmpty(keyword) && loaiTim == "Mã hóa đơn")
+                    {
+                        query += " AND maHoaDon LIKE @kw";
+                    }
+
+                    if (tuNgay != null && denNgay != null)
+                    {
+                        query += " AND thoiGian >= @from AND thoiGian <= @to AND thoiGian >= '1000-01-01'";
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    if (!string.IsNullOrEmpty(keyword) && loaiTim == "Mã hóa đơn")
+                    {
+                        cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
+                    }
+
+                    if (tuNgay != null && denNgay != null)
+                    {
+                        cmd.Parameters.AddWithValue("@from", tuNgay.Value.Date);
+                        cmd.Parameters.AddWithValue("@to", denNgay.Value.Date.AddDays(1).AddTicks(-1)); // cuối ngày
+                    }
+
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvLichsu.DataSource = dt;
+
+                    DataGridViewHelper.FormatDataGridView(
+                        dgvLichsu,
+                        rightAlignColumns: new[] { "soLuong" },
+                        dateColumns: new[] { "thoiGian" },
+                        currencyColumns: null,
+                        centerAll: false
+                    );
                 }
-
-                if (tuNgay != null && denNgay != null)
-                {
-                    query += " AND thoiGian BETWEEN @from AND @to";
-                }
-
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                if (!string.IsNullOrEmpty(keyword) && loaiTim == "Mã hóa đơn")
-                    cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
-
-                if (tuNgay != null && denNgay != null)
-                {
-                    cmd.Parameters.AddWithValue("@from", tuNgay.Value.Date);
-                    cmd.Parameters.AddWithValue("@to", denNgay.Value.Date.AddDays(1).AddTicks(-1)); // đến cuối ngày
-                }
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvLichsu.DataSource = dt;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải lịch sử: " + ex.Message);
+            }
+
         }
 
 
