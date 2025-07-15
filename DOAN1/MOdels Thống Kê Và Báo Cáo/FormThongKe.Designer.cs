@@ -48,7 +48,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.Location = new Point(316, 65);
+            label1.Location = new Point(400, 61);
             label1.Name = "label1";
             label1.Size = new Size(241, 28);
             label1.TabIndex = 6;
@@ -57,7 +57,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(270, 135);
+            label3.Location = new Point(354, 131);
             label3.Name = "label3";
             label3.Size = new Size(147, 20);
             label3.TabIndex = 10;
@@ -66,7 +66,7 @@
             // lbltongspb
             // 
             lbltongspb.AutoSize = true;
-            lbltongspb.Location = new Point(468, 135);
+            lbltongspb.Location = new Point(552, 131);
             lbltongspb.Name = "lbltongspb";
             lbltongspb.Size = new Size(140, 20);
             lbltongspb.TabIndex = 11;
@@ -75,7 +75,7 @@
             // lbltongdoanhthu
             // 
             lbltongdoanhthu.AutoSize = true;
-            lbltongdoanhthu.Location = new Point(468, 180);
+            lbltongdoanhthu.Location = new Point(552, 176);
             lbltongdoanhthu.Name = "lbltongdoanhthu";
             lbltongdoanhthu.Size = new Size(114, 20);
             lbltongdoanhthu.TabIndex = 13;
@@ -84,7 +84,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(270, 180);
+            label6.Location = new Point(354, 176);
             label6.Name = "label6";
             label6.Size = new Size(121, 20);
             label6.TabIndex = 12;
@@ -93,7 +93,7 @@
             // lbltongtiennhap
             // 
             lbltongtiennhap.AutoSize = true;
-            lbltongtiennhap.Location = new Point(468, 218);
+            lbltongtiennhap.Location = new Point(552, 214);
             lbltongtiennhap.Name = "lbltongtiennhap";
             lbltongtiennhap.Size = new Size(113, 20);
             lbltongtiennhap.TabIndex = 15;
@@ -102,7 +102,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(270, 218);
+            label8.Location = new Point(354, 214);
             label8.Name = "label8";
             label8.Size = new Size(116, 20);
             label8.TabIndex = 14;
@@ -111,7 +111,7 @@
             // lblloinhuan
             // 
             lblloinhuan.AutoSize = true;
-            lblloinhuan.Location = new Point(468, 257);
+            lblloinhuan.Location = new Point(552, 253);
             lblloinhuan.Name = "lblloinhuan";
             lblloinhuan.Size = new Size(73, 20);
             lblloinhuan.TabIndex = 17;
@@ -120,7 +120,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(270, 257);
+            label10.Location = new Point(354, 253);
             label10.Name = "label10";
             label10.Size = new Size(77, 20);
             label10.TabIndex = 16;
@@ -128,59 +128,75 @@
             // 
             // btnBaocaobanhang
             // 
-            btnBaocaobanhang.Location = new Point(271, 369);
+            btnBaocaobanhang.BackColor = Color.Tomato;
+            btnBaocaobanhang.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnBaocaobanhang.ForeColor = SystemColors.ControlLightLight;
+            btnBaocaobanhang.Location = new Point(355, 365);
             btnBaocaobanhang.Name = "btnBaocaobanhang";
             btnBaocaobanhang.Size = new Size(338, 48);
             btnBaocaobanhang.TabIndex = 18;
             btnBaocaobanhang.Text = "Báo cáo bán hàng";
-            btnBaocaobanhang.UseVisualStyleBackColor = true;
+            btnBaocaobanhang.UseVisualStyleBackColor = false;
             btnBaocaobanhang.Click += btnBaocaobanhang_Click;
             // 
             // btnLuongnv
             // 
-            btnLuongnv.Location = new Point(271, 327);
+            btnLuongnv.BackColor = Color.Tomato;
+            btnLuongnv.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnLuongnv.ForeColor = SystemColors.ControlLightLight;
+            btnLuongnv.Location = new Point(355, 323);
             btnLuongnv.Name = "btnLuongnv";
             btnLuongnv.Size = new Size(338, 48);
             btnLuongnv.TabIndex = 19;
             btnLuongnv.Text = "Lương nhân viên";
-            btnLuongnv.UseVisualStyleBackColor = true;
+            btnLuongnv.UseVisualStyleBackColor = false;
             btnLuongnv.Click += btnLuongnv_Click;
             // 
             // btnDoanhthu
             // 
-            btnDoanhthu.Location = new Point(271, 412);
+            btnDoanhthu.BackColor = Color.Tomato;
+            btnDoanhthu.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnDoanhthu.ForeColor = SystemColors.ControlLightLight;
+            btnDoanhthu.Location = new Point(355, 408);
             btnDoanhthu.Name = "btnDoanhthu";
             btnDoanhthu.Size = new Size(338, 48);
             btnDoanhthu.TabIndex = 21;
             btnDoanhthu.Text = "Doanh thu";
-            btnDoanhthu.UseVisualStyleBackColor = true;
+            btnDoanhthu.UseVisualStyleBackColor = false;
             btnDoanhthu.Click += btnDoanhthu_Click;
             // 
             // btnnhapxuatkho
             // 
-            btnnhapxuatkho.Location = new Point(271, 457);
+            btnnhapxuatkho.BackColor = Color.Tomato;
+            btnnhapxuatkho.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnnhapxuatkho.ForeColor = SystemColors.ControlLightLight;
+            btnnhapxuatkho.Location = new Point(355, 453);
             btnnhapxuatkho.Name = "btnnhapxuatkho";
             btnnhapxuatkho.Size = new Size(338, 48);
             btnnhapxuatkho.TabIndex = 20;
             btnnhapxuatkho.Text = "Nhập / Xuất kho";
-            btnnhapxuatkho.UseVisualStyleBackColor = true;
+            btnnhapxuatkho.UseVisualStyleBackColor = false;
             btnnhapxuatkho.Click += btnnhapxuatkho_Click;
             // 
             // btnloinhuan
             // 
-            btnloinhuan.Location = new Point(271, 501);
+            btnloinhuan.BackColor = Color.Tomato;
+            btnloinhuan.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnloinhuan.ForeColor = SystemColors.ControlLightLight;
+            btnloinhuan.Location = new Point(355, 497);
             btnloinhuan.Name = "btnloinhuan";
             btnloinhuan.Size = new Size(338, 48);
             btnloinhuan.TabIndex = 23;
             btnloinhuan.Text = "Lợi nhuận";
-            btnloinhuan.UseVisualStyleBackColor = true;
+            btnloinhuan.UseVisualStyleBackColor = false;
             btnloinhuan.Click += btnloinhuan_Click;
             // 
             // FormThongKe
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(818, 575);
+            BackColor = Color.PaleTurquoise;
+            ClientSize = new Size(1029, 643);
             Controls.Add(btnloinhuan);
             Controls.Add(btnDoanhthu);
             Controls.Add(btnnhapxuatkho);

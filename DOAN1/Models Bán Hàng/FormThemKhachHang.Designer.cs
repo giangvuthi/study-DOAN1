@@ -58,12 +58,15 @@
             // 
             // btnLuu
             // 
+            btnLuu.BackColor = Color.Tomato;
+            btnLuu.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnLuu.ForeColor = SystemColors.ControlLightLight;
             btnLuu.Location = new Point(172, 279);
             btnLuu.Name = "btnLuu";
             btnLuu.Size = new Size(94, 29);
             btnLuu.TabIndex = 2;
             btnLuu.Text = "Lưu";
-            btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.UseVisualStyleBackColor = false;
             btnLuu.Click += btnLuu_Click;
             // 
             // txtTenkh
@@ -100,12 +103,15 @@
             // 
             // btnHuy
             // 
+            btnHuy.BackColor = Color.Tomato;
+            btnHuy.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnHuy.ForeColor = SystemColors.ControlLightLight;
             btnHuy.Location = new Point(293, 279);
             btnHuy.Name = "btnHuy";
             btnHuy.Size = new Size(94, 29);
             btnHuy.TabIndex = 7;
             btnHuy.Text = "Hủy";
-            btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.UseVisualStyleBackColor = false;
             // 
             // label4
             // 
@@ -121,6 +127,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.PaleTurquoise;
             ClientSize = new Size(600, 377);
             Controls.Add(label4);
             Controls.Add(btnHuy);

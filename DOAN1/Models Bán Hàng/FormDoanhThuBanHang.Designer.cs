@@ -75,7 +75,9 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.FromArgb(128, 255, 255);
+            button1.BackColor = Color.Tomato;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = SystemColors.ControlLightLight;
             button1.Location = new Point(536, 72);
             button1.Name = "button1";
             button1.Size = new Size(250, 29);
@@ -114,7 +116,9 @@
             // 
             // btnTailai
             // 
-            btnTailai.BackColor = Color.FromArgb(128, 255, 255);
+            btnTailai.BackColor = Color.Tomato;
+            btnTailai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTailai.ForeColor = SystemColors.ControlLightLight;
             btnTailai.Location = new Point(924, 31);
             btnTailai.Name = "btnTailai";
             btnTailai.Size = new Size(123, 68);
@@ -123,10 +127,11 @@
             btnTailai.UseVisualStyleBackColor = false;
             btnTailai.Click += btnTailai_Click;
             // 
-            // FormDoanhThu
+            // FormDoanhThuBanHang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1176, 627);
             Controls.Add(btnTailai);
             Controls.Add(cbmanv);
@@ -137,7 +142,7 @@
             Controls.Add(dtptu);
             Controls.Add(lbTongDoanhThu);
             Controls.Add(dgvDoanhthu);
-            Name = "FormDoanhThu";
+            Name = "FormDoanhThuBanHang";
             Text = "FormDoanhThu";
             Load += FormDoanhThu_Load;
             ((System.ComponentModel.ISupportInitialize)dgvDoanhthu).EndInit();

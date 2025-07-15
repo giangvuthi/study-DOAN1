@@ -46,12 +46,15 @@
             // 
             // btnThongKe
             // 
+            btnThongKe.BackColor = Color.Tomato;
+            btnThongKe.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnThongKe.ForeColor = SystemColors.ControlLightLight;
             btnThongKe.Location = new Point(636, 113);
             btnThongKe.Name = "btnThongKe";
             btnThongKe.Size = new Size(94, 36);
             btnThongKe.TabIndex = 5;
             btnThongKe.Text = "Thống kê";
-            btnThongKe.UseVisualStyleBackColor = true;
+            btnThongKe.UseVisualStyleBackColor = false;
             btnThongKe.Click += btnThongKe_Click;
             // 
             // dgvDoanhThu
@@ -129,32 +132,41 @@
             // 
             // btnQuayLai
             // 
+            btnQuayLai.BackColor = Color.Tomato;
+            btnQuayLai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnQuayLai.ForeColor = SystemColors.ControlLightLight;
             btnQuayLai.Location = new Point(750, 113);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.Size = new Size(94, 36);
             btnQuayLai.TabIndex = 12;
             btnQuayLai.Text = "Quay lại";
-            btnQuayLai.UseVisualStyleBackColor = true;
+            btnQuayLai.UseVisualStyleBackColor = false;
             btnQuayLai.Click += btnQuayLai_Click;
             // 
             // btnIn
             // 
+            btnIn.BackColor = Color.Tomato;
+            btnIn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnIn.ForeColor = SystemColors.ControlLightLight;
             btnIn.Location = new Point(636, 155);
             btnIn.Name = "btnIn";
             btnIn.Size = new Size(94, 36);
             btnIn.TabIndex = 20;
             btnIn.Text = "In";
-            btnIn.UseVisualStyleBackColor = true;
+            btnIn.UseVisualStyleBackColor = false;
             btnIn.Click += btnIn_Click;
             // 
             // btnTaiLai
             // 
+            btnTaiLai.BackColor = Color.Tomato;
+            btnTaiLai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTaiLai.ForeColor = SystemColors.ControlLightLight;
             btnTaiLai.Location = new Point(750, 155);
             btnTaiLai.Name = "btnTaiLai";
             btnTaiLai.Size = new Size(94, 36);
             btnTaiLai.TabIndex = 19;
             btnTaiLai.Text = "Tải lại";
-            btnTaiLai.UseVisualStyleBackColor = true;
+            btnTaiLai.UseVisualStyleBackColor = false;
             btnTaiLai.Click += btnTaiLai_Click;
             // 
             // printDocument1
@@ -165,6 +177,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1002, 557);
             Controls.Add(btnIn);
             Controls.Add(btnTaiLai);

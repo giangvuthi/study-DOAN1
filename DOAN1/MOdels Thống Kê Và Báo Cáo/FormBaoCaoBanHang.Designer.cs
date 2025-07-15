@@ -67,22 +67,28 @@
             // 
             // btnTaiLai
             // 
+            btnTaiLai.BackColor = Color.Tomato;
+            btnTaiLai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTaiLai.ForeColor = SystemColors.ControlLightLight;
             btnTaiLai.Location = new Point(634, 140);
             btnTaiLai.Name = "btnTaiLai";
             btnTaiLai.Size = new Size(90, 38);
             btnTaiLai.TabIndex = 2;
             btnTaiLai.Text = "Tải lại";
-            btnTaiLai.UseVisualStyleBackColor = true;
+            btnTaiLai.UseVisualStyleBackColor = false;
             btnTaiLai.Click += btnTaiLai_Click;
             // 
             // btnQuayLai
             // 
+            btnQuayLai.BackColor = Color.Tomato;
+            btnQuayLai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnQuayLai.ForeColor = SystemColors.ControlLightLight;
             btnQuayLai.Location = new Point(756, 140);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.Size = new Size(90, 38);
             btnQuayLai.TabIndex = 13;
             btnQuayLai.Text = "Quay lại";
-            btnQuayLai.UseVisualStyleBackColor = true;
+            btnQuayLai.UseVisualStyleBackColor = false;
             btnQuayLai.Click += btnQuayLai_Click;
             // 
             // label2
@@ -129,12 +135,15 @@
             // 
             // btnIn
             // 
+            btnIn.BackColor = Color.Tomato;
+            btnIn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnIn.ForeColor = SystemColors.ControlLightLight;
             btnIn.Location = new Point(756, 92);
             btnIn.Name = "btnIn";
             btnIn.Size = new Size(90, 38);
             btnIn.TabIndex = 18;
             btnIn.Text = "In";
-            btnIn.UseVisualStyleBackColor = true;
+            btnIn.UseVisualStyleBackColor = false;
             btnIn.Click += btnIn_Click;
             // 
             // dtpTuNgay
@@ -173,18 +182,22 @@
             // 
             // btnThongKe
             // 
+            btnThongKe.BackColor = Color.Tomato;
+            btnThongKe.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnThongKe.ForeColor = SystemColors.ControlLightLight;
             btnThongKe.Location = new Point(634, 92);
             btnThongKe.Name = "btnThongKe";
             btnThongKe.Size = new Size(90, 38);
             btnThongKe.TabIndex = 23;
             btnThongKe.Text = "Thống kê";
-            btnThongKe.UseVisualStyleBackColor = true;
+            btnThongKe.UseVisualStyleBackColor = false;
             btnThongKe.Click += btnThongKe_Click;
             // 
             // FormBaoCaoBanHang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1147, 686);
             Controls.Add(btnThongKe);
             Controls.Add(label5);

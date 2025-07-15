@@ -65,6 +65,7 @@
             // 
             // grbThongtinchung
             // 
+            grbThongtinchung.BackColor = Color.PaleTurquoise;
             grbThongtinchung.Controls.Add(cbManv);
             grbThongtinchung.Controls.Add(btnThemKhachHang);
             grbThongtinchung.Controls.Add(lblTongThanhTien);
@@ -132,16 +133,20 @@
             // 
             // btnThemSanPham
             // 
+            btnThemSanPham.BackColor = Color.Tomato;
+            btnThemSanPham.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnThemSanPham.ForeColor = SystemColors.ControlLightLight;
             btnThemSanPham.Location = new Point(793, 24);
             btnThemSanPham.Name = "btnThemSanPham";
             btnThemSanPham.Size = new Size(263, 29);
             btnThemSanPham.TabIndex = 3;
             btnThemSanPham.Text = "Them san pham ";
-            btnThemSanPham.UseVisualStyleBackColor = true;
+            btnThemSanPham.UseVisualStyleBackColor = false;
             btnThemSanPham.Click += btnThemSanPham_Click;
             // 
             // grbThongTinSanPham
             // 
+            grbThongTinSanPham.BackColor = Color.PaleTurquoise;
             grbThongTinSanPham.Controls.Add(txtTonKho);
             grbThongTinSanPham.Controls.Add(nudsoluong);
             grbThongTinSanPham.Controls.Add(txtTenSanpham);
@@ -213,22 +218,28 @@
             // 
             // btnTaoHoaDon
             // 
+            btnTaoHoaDon.BackColor = Color.Tomato;
+            btnTaoHoaDon.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTaoHoaDon.ForeColor = SystemColors.ControlLightLight;
             btnTaoHoaDon.Location = new Point(235, 505);
             btnTaoHoaDon.Name = "btnTaoHoaDon";
             btnTaoHoaDon.Size = new Size(263, 43);
             btnTaoHoaDon.TabIndex = 9;
             btnTaoHoaDon.Text = "Thanh toán";
-            btnTaoHoaDon.UseVisualStyleBackColor = true;
+            btnTaoHoaDon.UseVisualStyleBackColor = false;
             btnTaoHoaDon.Click += btnTaoHoaDon_Click;
             // 
             // btnXoaSanPham
             // 
+            btnXoaSanPham.BackColor = Color.Tomato;
+            btnXoaSanPham.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnXoaSanPham.ForeColor = SystemColors.ControlLightLight;
             btnXoaSanPham.Location = new Point(540, 504);
             btnXoaSanPham.Name = "btnXoaSanPham";
             btnXoaSanPham.Size = new Size(139, 44);
             btnXoaSanPham.TabIndex = 10;
             btnXoaSanPham.Text = "Xóa sản phẩm";
-            btnXoaSanPham.UseVisualStyleBackColor = true;
+            btnXoaSanPham.UseVisualStyleBackColor = false;
             btnXoaSanPham.Click += btnXoaSanPham_Click;
             // 
             // toolStrip1
@@ -280,12 +291,15 @@
             // 
             // btnHuy
             // 
+            btnHuy.BackColor = Color.Tomato;
+            btnHuy.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnHuy.ForeColor = SystemColors.ControlLightLight;
             btnHuy.Location = new Point(719, 505);
             btnHuy.Name = "btnHuy";
             btnHuy.Size = new Size(263, 43);
             btnHuy.TabIndex = 12;
             btnHuy.Text = "HỦY";
-            btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.UseVisualStyleBackColor = false;
             btnHuy.Click += btnHuy_Click;
             // 
             // printDocument1

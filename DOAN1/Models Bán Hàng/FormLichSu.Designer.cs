@@ -85,12 +85,15 @@
             // 
             // btnTimkiem
             // 
+            btnTimkiem.BackColor = Color.Tomato;
+            btnTimkiem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTimkiem.ForeColor = SystemColors.ControlLightLight;
             btnTimkiem.Location = new Point(901, 85);
             btnTimkiem.Name = "btnTimkiem";
             btnTimkiem.Size = new Size(87, 34);
             btnTimkiem.TabIndex = 5;
             btnTimkiem.Text = "TÌM KIẾM";
-            btnTimkiem.UseVisualStyleBackColor = true;
+            btnTimkiem.UseVisualStyleBackColor = false;
             btnTimkiem.Click += btnTimkiem_Click;
             // 
             // cbLoaitim
@@ -121,18 +124,22 @@
             // 
             // btnTailai
             // 
+            btnTailai.BackColor = Color.Tomato;
+            btnTailai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTailai.ForeColor = SystemColors.ControlLightLight;
             btnTailai.Location = new Point(901, 136);
             btnTailai.Name = "btnTailai";
             btnTailai.Size = new Size(87, 34);
             btnTailai.TabIndex = 9;
             btnTailai.Text = "TẢI LẠI";
-            btnTailai.UseVisualStyleBackColor = true;
+            btnTailai.UseVisualStyleBackColor = false;
             btnTailai.Click += btnTailai_Click;
             // 
             // FormLichSu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1148, 739);
             Controls.Add(btnTailai);
             Controls.Add(label3);

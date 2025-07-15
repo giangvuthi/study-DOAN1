@@ -368,12 +368,20 @@ namespace DOAN1
         {
             if (dgvThongTinSanPham.SelectedRows.Count > 0)
             {
-                dgvThongTinSanPham.Rows.RemoveAt(dgvThongTinSanPham.SelectedRows[0].Index);
-                TinhTongTien(); // cập nhật lại tổng tiền sau khi xoá
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá sản phẩm này không?",
+                                                      "Xác nhận xoá",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    dgvThongTinSanPham.Rows.RemoveAt(dgvThongTinSanPham.SelectedRows[0].Index);
+                    TinhTongTien(); // cập nhật lại tổng tiền sau khi xoá
+                }
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn dòng sản phẩm cần xoá!");
+                MessageBox.Show("Vui lòng chọn dòng sản phẩm cần xoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -469,37 +477,108 @@ namespace DOAN1
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
-            Font font = new Font("Courier New", 9); // Dễ canh hàng hơn
-            float y = 10;
-            float leftMargin = 10;
+            Font fontTitle = new Font("Arial", 14, FontStyle.Bold);
+            Font fontHeader = new Font("Arial", 10, FontStyle.Bold);
+            Font fontContent = new Font("Arial", 9);
+            Font fontFooter = new Font("Arial", 10, FontStyle.Italic);
 
-            g.DrawString("SIÊU THỊ ĐIỆN LẠNH", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, leftMargin, y);
+            float y = 20;
+            float leftMargin = 20;
+            float rightMargin = e.PageBounds.Width - 20;
+
+            // Tiêu đề
+            g.DrawString("HÓA ĐƠN THANH TOÁN", fontTitle, Brushes.Black,
+                         new RectangleF(leftMargin, y, rightMargin - leftMargin, fontTitle.Height),
+                         new StringFormat() { Alignment = StringAlignment.Center });
+            y += 30;
+
+            // Thông tin hóa đơn
+            g.DrawString($"Số hóa đơn: {txtMaHd.Text}", fontContent, Brushes.Black, leftMargin, y);
+            g.DrawString($"Ngày lập: {dtpNgayTao.Value:dd/MM/yyyy}", fontContent, Brushes.Black, rightMargin - 150, y);
             y += 20;
-            g.DrawString($"Mã HĐ: {txtMaHd.Text}", font, Brushes.Black, leftMargin, y); y += 15;
-            g.DrawString($"Ngày: {dtpNgayTao.Value:dd/MM/yyyy}", font, Brushes.Black, leftMargin, y); y += 15;
-            g.DrawString($"Khách: {cbmakhachhang.Text}", font, Brushes.Black, leftMargin, y); y += 15;
-            g.DrawString($"NV: {cbManv.Text}", font, Brushes.Black, leftMargin, y); y += 20;
 
-            g.DrawString("----------------------------------------", font, Brushes.Black, leftMargin, y); y += 15;
-            g.DrawString("SP              SL x DG               TT", font, Brushes.Black, leftMargin, y); y += 15;
-            g.DrawString("----------------------------------------", font, Brushes.Black, leftMargin, y); y += 15;
+            // Thông tin khách hàng
+            g.DrawString("Tới:", fontContent, Brushes.Black, leftMargin, y);
+            y += 15;
 
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT tenKhachHang, diaChi FROM tt_khachhang WHERE maKhachHang = @maKH";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@maKH", cbmakhachhang.SelectedValue);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        g.DrawString($"{reader["tenKhachHang"]}", fontContent, Brushes.Black, leftMargin + 10, y);
+                        y += 15;
+                        g.DrawString($"{reader["diaChi"]}", fontContent, Brushes.Black, leftMargin + 10, y);
+                        y += 20;
+                    }
+                }
+            }
+
+            // Bảng sản phẩm
+            float[] columnWidths = { 60, 150, 50, 80, 100 }; // Độ rộng các cột
+            string[] headers = { "Mã hàng", "Tên hàng", "SL", "Đơn giá", "Thành tiền" };
+
+            // Vẽ header
+            float x = leftMargin;
+            for (int i = 0; i < headers.Length; i++)
+            {
+                g.DrawString(headers[i], fontHeader, Brushes.Black, new RectangleF(x, y, columnWidths[i], fontHeader.Height));
+                x += columnWidths[i];
+            }
+            y += 20;
+
+            // Đường kẻ ngang
+            g.DrawLine(Pens.Black, leftMargin, y, rightMargin, y);
+            y += 10;
+
+            // Dữ liệu sản phẩm
             foreach (DataGridViewRow row in dgvThongTinSanPham.Rows)
             {
+                if (row.IsNewRow) continue;
+
+                x = leftMargin;
+                string maSP = row.Cells["MaSP"].Value.ToString();
                 string tenSP = row.Cells["TenSP"].Value.ToString();
                 int sl = Convert.ToInt32(row.Cells["SoLuong"].Value);
                 decimal dg = Convert.ToDecimal(row.Cells["DonGia"].Value);
                 decimal tt = Convert.ToDecimal(row.Cells["ThanhTien"].Value);
 
-                string dong = $"{tenSP,-10} {sl}x{dg:N0} = {tt:N0}";
-                g.DrawString(dong, font, Brushes.Black, leftMargin, y);
-                y += 15;
+                string[] values = {
+            maSP,
+            tenSP,
+            sl.ToString(),
+            dg.ToString("N0"),
+            tt.ToString("N0")
+        };
+
+                for (int i = 0; i < values.Length; i++)
+                {
+                    g.DrawString(values[i], fontContent, Brushes.Black,
+                                new RectangleF(x, y, columnWidths[i], fontContent.Height));
+                    x += columnWidths[i];
+                }
+                y += 20;
             }
 
-            g.DrawString("----------------------------------------", font, Brushes.Black, leftMargin, y); y += 15;
-            g.DrawString("TỔNG: " + lblTongThanhTien.Text, new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, leftMargin, y); y += 25;
+            // Tổng cộng
+            y += 10;
+            g.DrawLine(Pens.Black, leftMargin, y, rightMargin, y);
+            y += 15;
 
-            g.DrawString("CẢM ƠN QUÝ KHÁCH!", font, Brushes.Black, leftMargin + 20, y);
+            g.DrawString("Tổng cộng:", fontHeader, Brushes.Black, rightMargin - 180, y);
+            g.DrawString(lblTongThanhTien.Text, fontHeader, Brushes.Black, rightMargin - 80, y);
+            y += 30;
+
+            // Footer
+            g.DrawString("Cảm ơn quý khách!", fontFooter, Brushes.Black,
+                        new RectangleF(leftMargin, y, rightMargin - leftMargin, fontFooter.Height),
+                        new StringFormat() { Alignment = StringAlignment.Center });
         }
 
     }
