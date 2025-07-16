@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBanhang));
             grbThongtinchung = new GroupBox();
             cbManv = new ComboBox();
             btnThemKhachHang = new Button();
@@ -45,21 +46,33 @@
             dgvThongTinSanPham = new DataGridView();
             btnTaoHoaDon = new Button();
             btnXoaSanPham = new Button();
+            toolStrip1 = new ToolStrip();
+            tsLichsubanhang = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tsDoanhthu = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            tsLammoi = new ToolStripButton();
+            btnHuy = new Button();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
+            label1 = new Label();
             grbThongtinchung.SuspendLayout();
             grbThongTinSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvThongTinSanPham).BeginInit();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // grbThongtinchung
             // 
+            grbThongtinchung.BackColor = Color.PaleTurquoise;
             grbThongtinchung.Controls.Add(cbManv);
             grbThongtinchung.Controls.Add(btnThemKhachHang);
             grbThongtinchung.Controls.Add(lblTongThanhTien);
             grbThongtinchung.Controls.Add(dtpNgayTao);
             grbThongtinchung.Controls.Add(cbmakhachhang);
             grbThongtinchung.Controls.Add(txtMaHd);
-            grbThongtinchung.Location = new Point(28, 26);
+            grbThongtinchung.Location = new Point(32, 95);
             grbThongtinchung.Name = "grbThongtinchung";
             grbThongtinchung.Size = new Size(1108, 71);
             grbThongtinchung.TabIndex = 0;
@@ -90,9 +103,9 @@
             lblTongThanhTien.AutoSize = true;
             lblTongThanhTien.Location = new Point(793, 34);
             lblTongThanhTien.Name = "lblTongThanhTien";
-            lblTongThanhTien.Size = new Size(50, 20);
+            lblTongThanhTien.Size = new Size(113, 20);
             lblTongThanhTien.TabIndex = 4;
-            lblTongThanhTien.Text = "label1";
+            lblTongThanhTien.Text = "Tổng thành tiền";
             // 
             // dtpNgayTao
             // 
@@ -114,28 +127,33 @@
             txtMaHd.Location = new Point(19, 26);
             txtMaHd.Name = "txtMaHd";
             txtMaHd.PlaceholderText = "Ma hoa don";
+            txtMaHd.ReadOnly = true;
             txtMaHd.Size = new Size(84, 27);
             txtMaHd.TabIndex = 0;
             // 
             // btnThemSanPham
             // 
+            btnThemSanPham.BackColor = Color.Tomato;
+            btnThemSanPham.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnThemSanPham.ForeColor = SystemColors.ControlLightLight;
             btnThemSanPham.Location = new Point(793, 24);
             btnThemSanPham.Name = "btnThemSanPham";
             btnThemSanPham.Size = new Size(263, 29);
             btnThemSanPham.TabIndex = 3;
             btnThemSanPham.Text = "Them san pham ";
-            btnThemSanPham.UseVisualStyleBackColor = true;
+            btnThemSanPham.UseVisualStyleBackColor = false;
             btnThemSanPham.Click += btnThemSanPham_Click;
             // 
             // grbThongTinSanPham
             // 
+            grbThongTinSanPham.BackColor = Color.PaleTurquoise;
             grbThongTinSanPham.Controls.Add(txtTonKho);
             grbThongTinSanPham.Controls.Add(nudsoluong);
             grbThongTinSanPham.Controls.Add(txtTenSanpham);
             grbThongTinSanPham.Controls.Add(txtDonGia);
             grbThongTinSanPham.Controls.Add(btnThemSanPham);
             grbThongTinSanPham.Controls.Add(cbMasanpham);
-            grbThongTinSanPham.Location = new Point(28, 103);
+            grbThongTinSanPham.Location = new Point(32, 172);
             grbThongTinSanPham.Name = "grbThongTinSanPham";
             grbThongTinSanPham.Size = new Size(1108, 71);
             grbThongTinSanPham.TabIndex = 7;
@@ -147,6 +165,7 @@
             txtTonKho.Location = new Point(475, 28);
             txtTonKho.Name = "txtTonKho";
             txtTonKho.PlaceholderText = "Tồn kho";
+            txtTonKho.ReadOnly = true;
             txtTonKho.Size = new Size(115, 27);
             txtTonKho.TabIndex = 8;
             // 
@@ -156,12 +175,14 @@
             nudsoluong.Name = "nudsoluong";
             nudsoluong.Size = new Size(101, 27);
             nudsoluong.TabIndex = 7;
+            nudsoluong.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // txtTenSanpham
             // 
             txtTenSanpham.Location = new Point(138, 28);
             txtTenSanpham.Name = "txtTenSanpham";
             txtTenSanpham.PlaceholderText = "Ten san pham";
+            txtTenSanpham.ReadOnly = true;
             txtTenSanpham.Size = new Size(144, 27);
             txtTenSanpham.TabIndex = 6;
             // 
@@ -170,6 +191,7 @@
             txtDonGia.Location = new Point(316, 25);
             txtDonGia.Name = "txtDonGia";
             txtDonGia.PlaceholderText = "Don gia";
+            txtDonGia.ReadOnly = true;
             txtDonGia.Size = new Size(116, 27);
             txtDonGia.TabIndex = 0;
             // 
@@ -185,7 +207,7 @@
             // dgvThongTinSanPham
             // 
             dgvThongTinSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvThongTinSanPham.Location = new Point(28, 195);
+            dgvThongTinSanPham.Location = new Point(32, 264);
             dgvThongTinSanPham.Name = "dgvThongTinSanPham";
             dgvThongTinSanPham.RowHeadersWidth = 51;
             dgvThongTinSanPham.Size = new Size(1108, 209);
@@ -196,29 +218,122 @@
             // 
             // btnTaoHoaDon
             // 
-            btnTaoHoaDon.Location = new Point(429, 436);
+            btnTaoHoaDon.BackColor = Color.Tomato;
+            btnTaoHoaDon.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTaoHoaDon.ForeColor = SystemColors.ControlLightLight;
+            btnTaoHoaDon.Location = new Point(235, 505);
             btnTaoHoaDon.Name = "btnTaoHoaDon";
-            btnTaoHoaDon.Size = new Size(263, 29);
+            btnTaoHoaDon.Size = new Size(263, 43);
             btnTaoHoaDon.TabIndex = 9;
-            btnTaoHoaDon.Text = "Tạo hóa đơn";
-            btnTaoHoaDon.UseVisualStyleBackColor = true;
+            btnTaoHoaDon.Text = "Thanh toán";
+            btnTaoHoaDon.UseVisualStyleBackColor = false;
             btnTaoHoaDon.Click += btnTaoHoaDon_Click;
             // 
             // btnXoaSanPham
             // 
-            btnXoaSanPham.Location = new Point(1005, 271);
+            btnXoaSanPham.BackColor = Color.Tomato;
+            btnXoaSanPham.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnXoaSanPham.ForeColor = SystemColors.ControlLightLight;
+            btnXoaSanPham.Location = new Point(540, 504);
             btnXoaSanPham.Name = "btnXoaSanPham";
-            btnXoaSanPham.Size = new Size(109, 44);
+            btnXoaSanPham.Size = new Size(139, 44);
             btnXoaSanPham.TabIndex = 10;
-            btnXoaSanPham.Text = "Xóa";
-            btnXoaSanPham.UseVisualStyleBackColor = true;
+            btnXoaSanPham.Text = "Xóa sản phẩm";
+            btnXoaSanPham.UseVisualStyleBackColor = false;
             btnXoaSanPham.Click += btnXoaSanPham_Click;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsLichsubanhang, toolStripSeparator1, tsDoanhthu, toolStripSeparator2, tsLammoi });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1187, 27);
+            toolStrip1.TabIndex = 11;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tsLichsubanhang
+            // 
+            tsLichsubanhang.Image = Properties.Resources.icons8_detail_48;
+            tsLichsubanhang.ImageTransparentColor = Color.Magenta;
+            tsLichsubanhang.Name = "tsLichsubanhang";
+            tsLichsubanhang.Size = new Size(163, 24);
+            tsLichsubanhang.Text = "Lịch sử tạo hóa đơn";
+            tsLichsubanhang.Click += tsLichsubanhang_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 27);
+            // 
+            // tsDoanhthu
+            // 
+            tsDoanhthu.Image = Properties.Resources.icons8_detail_50;
+            tsDoanhthu.ImageTransparentColor = Color.Magenta;
+            tsDoanhthu.Name = "tsDoanhthu";
+            tsDoanhthu.Size = new Size(102, 24);
+            tsDoanhthu.Text = "Doanh thu";
+            tsDoanhthu.Click += tsDoanhthu_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 27);
+            // 
+            // tsLammoi
+            // 
+            tsLammoi.Image = Properties.Resources.icons8_refresh;
+            tsLammoi.ImageTransparentColor = Color.Magenta;
+            tsLammoi.Name = "tsLammoi";
+            tsLammoi.Size = new Size(91, 24);
+            tsLammoi.Text = "Làm mới";
+            tsLammoi.Click += tsLammoi_Click;
+            // 
+            // btnHuy
+            // 
+            btnHuy.BackColor = Color.Tomato;
+            btnHuy.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnHuy.ForeColor = SystemColors.ControlLightLight;
+            btnHuy.Location = new Point(719, 505);
+            btnHuy.Name = "btnHuy";
+            btnHuy.Size = new Size(263, 43);
+            btnHuy.TabIndex = 12;
+            btnHuy.Text = "HỦY";
+            btnHuy.UseVisualStyleBackColor = false;
+            btnHuy.Click += btnHuy_Click;
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(505, 57);
+            label1.Name = "label1";
+            label1.Size = new Size(109, 28);
+            label1.TabIndex = 7;
+            label1.Text = "HÓA ĐƠN";
             // 
             // FormBanhang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1148, 504);
+            ClientSize = new Size(1187, 596);
+            Controls.Add(label1);
+            Controls.Add(btnHuy);
+            Controls.Add(toolStrip1);
             Controls.Add(btnXoaSanPham);
             Controls.Add(btnTaoHoaDon);
             Controls.Add(dgvThongTinSanPham);
@@ -233,7 +348,10 @@
             grbThongTinSanPham.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudsoluong).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvThongTinSanPham).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -255,5 +373,15 @@
         private TextBox txtTonKho;
         private ComboBox cbManv;
         private Button btnXoaSanPham;
+        private ToolStrip toolStrip1;
+        private ToolStripButton tsLichsubanhang;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton tsDoanhthu;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton tsLammoi;
+        private Button btnHuy;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
+        private Label label1;
     }
 }
